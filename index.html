@@ -1180,22 +1180,90 @@ async function confirmApprove() {
     var code = currentApproveCode;
     var newCode = $('generatedAccessCode').value.trim();
     var message = $('approveMessage').value;
-    if (!newCode) { showAlert('Erreur', 'Veuillez générer un code d\'accès.', '⚠️'); return; }
-    var st = students[code];
-    if (!st) return;
-    students[newCode] = Object.assign({}, st, { status: 'approved' });
-    delete students[code];
-    if (isSupabaseReady) {
-        try { await supabase.from('students').update({ status: 'approved', approved_code: newCode, code: newCode }).eq('code', code); console.log('✅ Approuvé dans Supabase:', newCode); } catch (e) { console.warn('Erreur update Supabase:', e); }
+    
+    if (!newCode) {
+        showAlert('Erreur', 'Veuillez générer un code d\'accès.', '⚠️');
+        return;
     }
+    
+    var st = students[code];
+    if (!st) {
+        showAlert('Erreur', 'Étudiant introuvable.', '❌');
+        return;
+    }
+    
+    // 1. Kreye nouvo etidyan an nan cache lokal la ak NOUVO kòd la
+    students[newCode] = Object.assign({}, st, { 
+        status: 'approved',
+        date: new Date().toISOString().split('T')[0]
+    });
+    
+    // 2. Efase ansyen an nan cache lokal la
+    delete students[code];
+    
+    // 3. Nan Supabase: INSERE nouvo a + SIPIRME ansyen an (pa UPDATE code la!)
+    if (isSupabaseReady) {
+        try {
+            // Insérer le nouveau avec le nouveau code
+            var newStudentData = {
+                code: newCode,
+                nom: st.nom,
+                prenom: st.prenom || '',
+                phone: st.phone || '',
+                formation: st.formation,
+                formation_id: st.formationId,
+                date: new Date().toISOString().split('T')[0],
+                schedule: st.schedule,
+                duration: st.duration,
+                total_amount: st.totalAmount,
+                paid_amount: st.paidAmount,
+                progress: st.progress,
+                completed_courses: st.completedCourses,
+                total_courses: st.totalCourses,
+                present: st.present,
+                absent: st.absent,
+                late: st.late,
+                payment_method: st.paymentMethod,
+                payment_number: st.paymentNumber || '',
+                status: 'approved',
+                approved_code: newCode,
+                created_by: 'admin_approved'
+            };
+            
+            var insertResult = await dbInsertStudent(newStudentData);
+            console.log('✅ Nouvo etidyan insere:', newCode, insertResult);
+            
+            // Supprimer l'ancien (TEMP...)
+            if (code.startsWith('TEMP')) {
+                var deleteResult = await dbDeleteStudent(code);
+                console.log('🗑️ Ansyen etidyan siprime:', code, deleteResult);
+            } else {
+                // Si ce n'est pas un TEMP, on met juste à jour le status
+                await supabase.from('students').update({
+                    status: 'approved',
+                    approved_code: newCode
+                }).eq('code', code);
+                console.log('✏️ Status mise à jour pour:', code);
+            }
+        } catch (e) {
+            console.error('❌ Erè nan Supabase:', e);
+            showAlert('Atansyon', 'Changement sauvegardé localement mais erreur Supabase: ' + e.message, '️');
+        }
+    }
+    
+    // 4. Voye WhatsApp bay etidyan an
     var phone = st.phone.replace(/\D/g, '');
     if (phone.startsWith('0')) phone = '509' + phone.substring(1);
     if (!phone.startsWith('509')) phone = '509' + phone;
     var whatsappURL = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(message);
     window.open(whatsappURL, '_blank');
+    
     closeApprove();
-    showAlert('Succès!', 'Inscription approuvée! Le code d\'accès a été envoyé à l\'étudiant via WhatsApp.', '✅');
+    showAlert('Succès!', 'Inscription approuvée! Code: ' + newCode + '\nWhatsApp voye bay: ' + phone, '✅');
+    
+    // 5. Rafraîchir dashboard la
     await showAdminDashboard();
+    }
 }
 
 async function rejectStudent(code) {
