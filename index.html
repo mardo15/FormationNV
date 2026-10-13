@@ -7,9 +7,6 @@
 <meta name="keywords" content="formation, Haïti, sandalerie, decoration, perruque, bouquet, chimie, impression">
 <meta name="author" content="Nova Institute">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta property="og:title" content="Nova Institute - Centre de Formation Professionnelle">
-<meta property="og:description" content="Développez vos compétences avec des formations pratiques et de qualité">
-<meta property="og:type" content="website">
 <title>Nova Institute - Centre de Formation Professionnelle</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/poppins@5.0.8/index.min.css">
@@ -177,10 +174,11 @@ nav a:hover{color:var(--gold)}
 .admin-badge{display:inline-block;padding:4px 10px;border-radius:15px;font-size:11px;font-weight:600}
 .badge-paid{background:#d4edda;color:#155724}
 .badge-pending{background:#fff3cd;color:#856404}
-.loading-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(250,247,242,0.95);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.loading-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(250,247,242,0.98);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.5s}
+.loading-overlay.hidden{opacity:0;pointer-events:none}
 .loading-spinner{width:50px;height:50px;border:4px solid var(--cream-dark);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.loading-text{margin-top:15px;color:var(--brown-main);font-weight:600}
+.loading-text{margin-top:15px;color:var(--brown-main);font-weight:600;font-size:16px}
 footer{background:var(--white);color:var(--brown-dark);padding:50px 30px 25px;margin-top:70px;position:relative;border-top:3px solid var(--gold)}
 .footer-content{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:35px}
 .footer-section h3{margin-bottom:15px;color:var(--gold);font-family:'Playfair Display',serif;font-size:20px}
@@ -209,7 +207,7 @@ footer{background:var(--white);color:var(--brown-dark);padding:50px 30px 25px;ma
 </div>
 
 <div class="marquee-container">
-<div class="marquee-text">🎓 Nova Institute - Centre de Formation Professionnelle | 📍 Cité Militaire / L'École Foi d'Abraham | 📞 58046408 / 44699777 | ✉️ institutenova61@gmail.com | 💬 WhatsApp: 33552907 | 💳 Natcash: 58046408 | 💰 Moncash: 44699777 | 🎯 Formations Professionnelles de Qualité</div>
+<div class="marquee-text">🎓 Nova Institute - Centre de Formation Professionnelle | 📍 Cité Militaire / L'École Foi d'Abraham |  58046408 / 44699777 | ✉️ institutenova61@gmail.com | 💬 WhatsApp: 33552907 | 💳 Natcash: 58046408 | 💰 Moncash: 44699777 | 🎯 Formations Professionnelles de Qualité</div>
 </div>
 <header>
 <div class="header-content">
@@ -301,7 +299,7 @@ Nova<span>Institute</span>
 </div>
 <div class="quick-actions">
 <button class="quick-action-btn" data-section="formation" type="button"><div class="icon">📚</div><h3>Ma Formation</h3></button>
-<button class="quick-action-btn" data-section="cours" type="button"><div class="icon">📝</div><h3>Mes Cours</h3></button>
+<button class="quick-action-btn" data-section="cours" type="button"><div class="icon"></div><h3>Mes Cours</h3></button>
 <button class="quick-action-btn" data-section="presences" type="button"><div class="icon">🕐</div><h3>Mes Présences</h3></button>
 <button class="quick-action-btn" data-section="paiements" type="button"><div class="icon">💰</div><h3>Mes Paiements</h3></button>
 </div>
@@ -321,7 +319,7 @@ Nova<span>Institute</span>
 <div class="info-row"><span class="info-label">Évaluations:</span><span class="info-value" id="evaluations">En cours</span></div>
 </div>
 <div class="dashboard-card">
-<h3>🕐 Mes Présences</h3>
+<h3> Mes Présences</h3>
 <div class="info-row"><span class="info-label">Présent:</span><span class="info-value status-badge status-present" id="presentCount">0</span></div>
 <div class="info-row"><span class="info-label">Absent:</span><span class="info-value status-badge status-absent" id="absentCount">0</span></div>
 <div class="info-row"><span class="info-label">Retard:</span><span class="info-value status-badge status-retard" id="lateCount">0</span></div>
@@ -399,7 +397,7 @@ Nova<span>Institute</span>
 <div class="payment-info" id="paymentInfoBox">
 <div class="payment-info-title"><span id="paymentInfoIcon"></span><span id="paymentInfoTitle">Envoyez le paiement à:</span></div>
 <div class="payment-info-number" id="paymentInfoNumber">-</div>
-<div class="payment-info-note">📌 Après avoir effectué le paiement, cliquez sur "S'inscrire". L'administration recevra les détails via WhatsApp.</div>
+<div class="payment-info-note"> Après avoir effectué le paiement, cliquez sur "S'inscrire". L'administration recevra les détails via WhatsApp.</div>
 </div>
 </div>
 <button type="submit" class="btn btn-primary" style="width:100%;" id="registerSubmitBtn">S'inscrire</button>
@@ -435,7 +433,7 @@ Nova<span>Institute</span>
 <footer>
 <div class="footer-content">
 <div class="footer-section"><h3>Nova Institute</h3><p>Centre de Formation Professionnelle</p><p>Cité Militaire / L'École Foi d'Abraham</p><p style="margin-top:12px;font-style:italic;color:var(--gold);">Votre talent, notre mission!</p></div>
-<div class="footer-section"><h3>Contact</h3><p>📞 58046408 / 44699777</p><p>💬 WhatsApp: 33552907</p><p>✉️ institutenova61@gmail.com</p></div>
+<div class="footer-section"><h3>Contact</h3><p> 58046408 / 44699777</p><p>💬 WhatsApp: 33552907</p><p>✉️ institutenova61@gmail.com</p></div>
 <div class="footer-section"><h3>Paiement</h3><p>💳 Natcash: 58046408</p><p>💰 Moncash: 44699777</p><p style="margin-top:12px;font-size:13px;">Paiement sécurisé et flexible</p></div>
 </div>
 <div class="footer-bottom"><p>&copy; 2026 Nova Institute. Tous droits réservés. | Propulsé par Supabase</p></div>
@@ -446,9 +444,6 @@ Nova<span>Institute</span>
 (function(){
 'use strict';
 
-// ============================================================
-// CONFIGURATION SUPABASE
-// ============================================================
 var SUPABASE_URL = 'https://llbornrbdhkcwzapicol.supabase.co';
 var SUPABASE_KEY = 'sb_publishable_vy5dQwJNEgWa58_KgkNqXw_L0xrIZgP';
 var supabase = null;
@@ -468,44 +463,58 @@ var CONFIG = {
     }
 };
 
-// ============================================================
-// DONNÉES DES FORMATIONS (EXTRAITES DES PDF)
-// ============================================================
 var formations = [
     {id:'chimie',name:'Chimie Industrielle',image:'https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=400&fit=crop',badge:'Séminaire',shortDesc:'Apprenez à fabriquer des produits d\'usage courant: savons, parfums, liquides et Mistoline.',description:'Ce séminaire vous permet de découvrir les bases pratiques de la fabrication de plusieurs produits d\'usage courant.',duration:'2 jours',schedule:'Samedi et Dimanche: 9h - 1h',inscription:1000,participation:2500,courses:['Savons lavés','Parfum','Liquide','Mistoline'],detail:{objectives:['Comprendre les principes de base de la fabrication de produits chimiques.','Maîtriser les techniques de fabrication des savons lavés.','Apprendre à concevoir des parfums personnalisés.','Fabriquer des produits liquides de qualité.','Réaliser de la Mistoline selon les standards professionnels.','Développer une activité génératrice de revenus.'],modules:[{title:'Module 1 — Savons Lavés',content:'Apprentissage des techniques de fabrication des savons lavés: matières premières, dosages, saponification, moulage et finition.'},{title:'Module 2 — Parfum',content:'Initiation à la conception de parfums: notes olfactives, techniques d\'assemblage et création de fragrances personnalisées.'},{title:'Module 3 — Liquide',content:'Fabrication de produits liquides d\'usage courant: formules de base, dosages et techniques de production.'},{title:'Module 4 — Mistoline',content:'Réalisation de la Mistoline: ingrédients, processus de fabrication et techniques de conditionnement.'}],skills:['Maîtriser les formules de base des produits chimiques','Connaître les matières premières et leurs propriétés','Respecter les dosages et les proportions','Assurer la qualité et la sécurité des produits','Conditionner et présenter les produits finis']}},
     {id:'decoration',name:'Décoration Événementielle',image:'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop',badge:'2 Mois',shortDesc:'Maîtrisez les techniques de décoration pour mariages, anniversaires et cérémonies.',description:'La formation en décoration événementielle permet à l\'apprenant de découvrir les principes de conception, d\'organisation et de réalisation d\'une décoration pour différents événements.',duration:'2 mois',schedule:'10h - 3h',inscription:1000,participation:9500,courses:['Décoration mariage','Décoration anniversaire','Décoration cérémonie','Création d\'ambiances'],includes:'Maillot inclus',detail:{objectives:['Comprendre les bases de la décoration et de l\'aménagement d\'un espace.','Choisir et harmoniser les couleurs, matières et éléments décoratifs.','Préparer un thème et un concept décoratif.','Réaliser des décors simples pour différents types d\'événements.','Utiliser correctement les ballons, tissus, fleurs et accessoires décoratifs.','Développer une méthode de travail professionnelle.','Apprendre les bases de l\'organisation, du budget et de la commercialisation.'],weeks:[{num:1,content:'Introduction à la décoration événementielle, styles, thèmes, couleurs, outils et règles de sécurité.'},{num:2,content:'Harmonie des couleurs, choix des matières, conception d\'un thème et préparation d\'un espace.'},{num:3,content:'Décoration avec ballons: arches, colonnes, bouquets et compositions.'},{num:4,content:'Utilisation des tissus, nappes, rideaux, fonds décoratifs et éléments de présentation.'},{num:5,content:'Décoration de tables, espaces photo, tables principales et petits événements.'},{num:6,content:'Composition avec fleurs et accessoires, personnalisation et création d\'ambiances.'},{num:7,content:'Conception d\'un décor complet: préparation, montage, organisation et finitions.'},{num:8,content:'Projet final: réalisation et présentation d\'une décoration événementielle complète.'}],skills:['Concevoir et réaliser une décoration adaptée à un événement','Harmoniser les couleurs et les matières','Travailler avec ballons, tissus et fleurs','Présenter un service de manière professionnelle','Gérer un budget et commercialiser ses services']}},
-    {id:'sandalerie',name:'Sandalerie Artisanale',image:'https://images.unsplash.com/photo-1603487742131-4160ec999306?w=600&h=400&fit=crop',badge:'2 Mois',shortDesc:'Fabriquez des sandales artisanales pour hommes et femmes avec créativité.',description:'Cette formation de deux mois est destinée aux personnes souhaitant apprendre les techniques de fabrication de sandales artisanales, depuis la conception du modèle jusqu’aux finitions.',duration:'2 mois',schedule:'3h - 5h',inscription:1000,participation:9000,courses:['Conception de modèles','Choix des matériaux','Techniques de fabrication','Finitions'],includes:'Maillot inclus',detail:{objectives:['Identifier et utiliser correctement les matières, outils et accessoires nécessaires.','Prendre les mesures et préparer une semelle adaptée.','Découper, assembler, coller et fixer les différentes parties d’une sandale.','Réaliser plusieurs modèles de sandales artisanales.','Maîtriser les techniques de finition et de contrôle de qualité.','Développer une capacité de production permettant de créer une petite activité génératrice de revenus.'],weeks:[{num:1,content:'Présentation de la sandalerie, sécurité, outils, matières, prise de mesures et découverte des différents modèles.'},{num:2,content:'Préparation des semelles: traçage, découpe, ajustement et préparation des supports.'},{num:3,content:'Conception des brides et bandes: mesures, traçage, découpe et préparation.'},{num:4,content:'Assemblage d’un premier modèle: collage, fixation, positionnement et ajustements.'},{num:5,content:'Réalisation de modèles avec boucles, brides et différentes formes de décoration.'},{num:6,content:'Techniques de finition: ponçage, nettoyage, correction des défauts et contrôle de qualité.'},{num:7,content:'Création de modèles personnalisés, combinaison des matières et amélioration du design.'},{num:8,content:'Projet final: réalisation complète d’une ou plusieurs paires, présentation, évaluation et conseils pour la commercialisation.'}],skills:['Concevoir et fabriquer une paire de sandales artisanales','Réaliser des finitions soignées','Reproduire plusieurs modèles','Préparer une petite production destinée à la vente','Maîtriser les techniques d\'assemblage et de collage']}},
+    {id:'sandalerie',name:'Sandalerie Artisanale',image:'https://images.unsplash.com/photo-1603487742131-4160ec999306?w=600&h=400&fit=crop',badge:'2 Mois',shortDesc:'Fabriquez des sandales artisanales pour hommes et femmes avec créativité.',description:'Cette formation de deux mois est destinée aux personnes souhaitant apprendre les techniques de fabrication de sandales artisanales, depuis la conception du modèle jusqu\'aux finitions.',duration:'2 mois',schedule:'3h - 5h',inscription:1000,participation:9000,courses:['Conception de modèles','Choix des matériaux','Techniques de fabrication','Finitions'],includes:'Maillot inclus',detail:{objectives:['Identifier et utiliser correctement les matières, outils et accessoires nécessaires.','Prendre les mesures et préparer une semelle adaptée.','Découper, assembler, coller et fixer les différentes parties d\'une sandale.','Réaliser plusieurs modèles de sandales artisanales.','Maîtriser les techniques de finition et de contrôle de qualité.','Développer une capacité de production permettant de créer une petite activité génératrice de revenus.'],weeks:[{num:1,content:'Présentation de la sandalerie, sécurité, outils, matières, prise de mesures et découverte des différents modèles.'},{num:2,content:'Préparation des semelles: traçage, découpe, ajustement et préparation des supports.'},{num:3,content:'Conception des brides et bandes: mesures, traçage, découpe et préparation.'},{num:4,content:'Assemblage d\'un premier modèle: collage, fixation, positionnement et ajustements.'},{num:5,content:'Réalisation de modèles avec boucles, brides et différentes formes de décoration.'},{num:6,content:'Techniques de finition: ponçage, nettoyage, correction des défauts et contrôle de qualité.'},{num:7,content:'Création de modèles personnalisés, combinaison des matières et amélioration du design.'},{num:8,content:'Projet final: réalisation complète d\'une ou plusieurs paires, présentation, évaluation et conseils pour la commercialisation.'}],skills:['Concevoir et fabriquer une paire de sandales artisanales','Réaliser des finitions soignées','Reproduire plusieurs modèles','Préparer une petite production destinée à la vente','Maîtriser les techniques d\'assemblage et de collage']}},
     {id:'impression',name:'Impression Moderne',image:'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=600&h=400&fit=crop',badge:'Séminaire',shortDesc:'Techniques d\'impression sur tableau PVC, tableau lumineux et bidons personnalisés.',description:'Ce séminaire pratique permet aux participants de découvrir et de pratiquer trois techniques de personnalisation et de création.',duration:'2 jours',schedule:'Samedi et Dimanche: 9h - 1h',inscription:500,participation:4000,courses:['Tableau PVC','Tableau lumineux','Bidon personnalisé'],detail:{objectives:['Comprendre les principes de base de l\'impression et de la personnalisation.','Découvrir les matériaux et outils nécessaires pour chaque produit.','Apprendre les étapes essentielles de préparation, création et finition.','Réaliser des produits propres, esthétiques et présentables.','Développer sa créativité dans le choix des images, textes et designs.','Comprendre les bases de la présentation et de la commercialisation.'],modules:[{title:'Module I — Tableau PVC',content:'Préparation du design, choix du format, préparation du support, transfert/application du visuel, découpe et finition, contrôle de qualité.'},{title:'Module II — Tableau lumineux',content:'Conception du visuel, préparation du support, positionnement du visuel, installation et vérification de l\'éclairage, assemblage et finitions.'},{title:'Module III — Bidon personnalisé',content:'Nettoyage et préparation du bidon, création ou adaptation du design, application de la personnalisation, finition et contrôle de qualité.'}],skills:['Créer des tableaux PVC personnalisés','Réaliser des tableaux lumineux attractifs','Personnaliser des bidons de manière professionnelle','Préparer des designs graphiques','Commercialiser les produits réalisés']}},
-    {id:'bouquet',name:'Bouquet Fleurs & Chambre Romantique',image:'https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=600&h=400&fit=crop',badge:'Séminaire',shortDesc:'Créez des bouquets uniques (fleurs éternelles, d\'argent, cake money) et des ambiances romantiques.',description:'Ce support pratique permet à l\'apprenant de comprendre les matériaux, les techniques de composition, l\'assemblage, l\'emballage et la présentation commerciale des bouquets et décorations.',duration:'2 jours',schedule:'Samedi et Dimanche: 9h - 1h',inscription:1000,participation:5000,courses:['Fleurs éternelles','Fleurs d\'argent','Emballage bouteille','Cake money','Décoration chambre'],detail:{objectives:['Comprendre les bases de la confection de bouquets décoratifs.','Maîtriser les techniques de composition et d\'assemblage.','Réaliser des fleurs éternelles, fleurs d\'argent, emballages bouteille et cake money.','Créer une ambiance romantique élégante et chaleureuse.','Adapter les décors aux occasions spéciales.','Créer une activité génératrice de revenus.'],chapters:[{num:1,title:'Notions et historique',content:'Les bouquets existent depuis des siècles comme moyen d’offrir, de décorer et de transmettre un message.'},{num:2,title:'Matériel et fournitures',content:'Fleurs éternelles ou artificielles, papier d\'emballage, rubans, fil floral, tiges, mousse, supports et accessoires.'},{num:3,title:'Fleurs éternelles',content:'Choisir les fleurs, préparer les tiges, déterminer les couleurs, créer une composition équilibrée et réaliser un emballage propre.'},{num:4,title:'Fleurs d\'argent',content:'Intégrer des billets ou éléments monétaires dans une composition florale de manière esthétique et sécurisée.'},{num:5,title:'Emballage bouteille',content:'Transformer une bouteille en cadeau décoratif en l\'intégrant dans une composition avec fleurs, papier et rubans.'},{num:6,title:'Cake money',content:'Création décorative inspirée de la présentation d\'un gâteau, dans laquelle l\'argent et les éléments décoratifs sont organisés en composition.'},{num:7,title:'Décoration chambre romantique',content:'Techniques de décoration avec ballons, fleurs, lumières, tissus et accessoires pour créer une ambiance romantique.'},{num:8,title:'Projet pratique final',content:'Réalisation d\'une création complète au choix: bouquet de fleurs éternelles, bouquet de fleurs d\'argent, emballage bouteille, cake money ou décoration chambre.'}],skills:['Créer des bouquets harmonieux et équilibrés','Maîtriser les techniques de fleurs éternelles et d\'argent','Réaliser des emballages bouteille créatifs','Concevoir des cake money originaux','Créer des ambiances romantiques complètes','Commercialiser ses créations']}},
-    {id:'perruque',name:'Confection de Perruques',image:'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&h=400&fit=crop',badge:'1 Mois',shortDesc:'Techniques professionnelles: Closure, Greffe, Perruque frange et Perruque 14×4.',description:'À travers ces techniques, l’étudiant(e) développe les bases nécessaires pour confectionner, personnaliser et finir des perruques de manière professionnelle.',duration:'1 mois',schedule:'Samedi et Dimanche: 9h - 1h',inscription:1000,participation:5000,courses:['Closure','Greffe','Perruque frange','Perruque 14×4'],includes:'Aiguilles gratuites',detail:{objectives:['Développer les bases nécessaires pour confectionner des perruques professionnellement.','Maîtriser les techniques de closure, greffe, perruque frange et 14×4.','Personnaliser et finir des perruques avec soin.','Acquérir une autonomie dans la réalisation complète de perruques.'],modules:[{title:'Technique 1 — Closure',content:'La closure est une pièce de dentelle qui permet de créer une finition naturelle. Préparer et positionner la closure, réaliser la couture et la fixation sur le bonnet, obtenir une finition propre et naturelle.'},{title:'Technique 2 — Greffe',content:'La greffe consiste à implanter ou fixer les mèches afin de construire une chevelure régulière et naturelle. Préparer le support, choisir l’ordre et la direction des mèches, contrôler la densité.'},{title:'Technique 3 — Perruque frange',content:'La perruque frange est conçue avec une frange qui encadre le visage et donne un style moderne. Préparer la base, déterminer la longueur et la forme de la frange, réaliser la coupe et la mise en forme.'},{title:'Technique 4 — Perruque 14×4',content:'La perruque 14×4 utilise une zone de dentelle plus large à l’avant pour offrir davantage de possibilités de coiffage. Préparer et positionner la dentelle, effectuer la couture, personnaliser la ligne de cheveux.'}],skills:['Confectionner des closures avec finition naturelle','Réaliser des greffes régulières et professionnelles','Créer des perruques frange modernes','Maîtriser la technique 14×4','Personnaliser et finir les perruques avec soin'],material:'Tête de mannequin, bonnet, aiguilles et fil, ciseaux, peigne/brosse, mèches ou cheveux, dentelle selon la technique et produits de finition.'}}
+    {id:'bouquet',name:'Bouquet Fleurs & Chambre Romantique',image:'https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=600&h=400&fit=crop',badge:'Séminaire',shortDesc:'Créez des bouquets uniques (fleurs éternelles, d\'argent, cake money) et des ambiances romantiques.',description:'Ce support pratique permet à l\'apprenant de comprendre les matériaux, les techniques de composition, l\'assemblage, l\'emballage et la présentation commerciale des bouquets et décorations.',duration:'2 jours',schedule:'Samedi et Dimanche: 9h - 1h',inscription:1000,participation:5000,courses:['Fleurs éternelles','Fleurs d\'argent','Emballage bouteille','Cake money','Décoration chambre'],detail:{objectives:['Comprendre les bases de la confection de bouquets décoratifs.','Maîtriser les techniques de composition et d\'assemblage.','Réaliser des fleurs éternelles, fleurs d\'argent, emballages bouteille et cake money.','Créer une ambiance romantique élégante et chaleureuse.','Adapter les décors aux occasions spéciales.','Créer une activité génératrice de revenus.'],chapters:[{num:1,title:'Notions et historique',content:'Les bouquets existent depuis des siècles comme moyen d\'offrir, de décorer et de transmettre un message.'},{num:2,title:'Matériel et fournitures',content:'Fleurs éternelles ou artificielles, papier d\'emballage, rubans, fil floral, tiges, mousse, supports et accessoires.'},{num:3,title:'Fleurs éternelles',content:'Choisir les fleurs, préparer les tiges, déterminer les couleurs, créer une composition équilibrée et réaliser un emballage propre.'},{num:4,title:'Fleurs d\'argent',content:'Intégrer des billets ou éléments monétaires dans une composition florale de manière esthétique et sécurisée.'},{num:5,title:'Emballage bouteille',content:'Transformer une bouteille en cadeau décoratif en l\'intégrant dans une composition avec fleurs, papier et rubans.'},{num:6,title:'Cake money',content:'Création décorative inspirée de la présentation d\'un gâteau, dans laquelle l\'argent et les éléments décoratifs sont organisés en composition.'},{num:7,title:'Décoration chambre romantique',content:'Techniques de décoration avec ballons, fleurs, lumières, tissus et accessoires pour créer une ambiance romantique.'},{num:8,title:'Projet pratique final',content:'Réalisation d\'une création complète au choix: bouquet de fleurs éternelles, bouquet de fleurs d\'argent, emballage bouteille, cake money ou décoration chambre.'}],skills:['Créer des bouquets harmonieux et équilibrés','Maîtriser les techniques de fleurs éternelles et d\'argent','Réaliser des emballages bouteille créatifs','Concevoir des cake money originaux','Créer des ambiances romantiques complètes','Commercialiser ses créations']}},
+    {id:'perruque',name:'Confection de Perruques',image:'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&h=400&fit=crop',badge:'1 Mois',shortDesc:'Techniques professionnelles: Closure, Greffe, Perruque frange et Perruque 14×4.',description:'À travers ces techniques, l\'étudiant(e) développe les bases nécessaires pour confectionner, personnaliser et finir des perruques de manière professionnelle.',duration:'1 mois',schedule:'Samedi et Dimanche: 9h - 1h',inscription:1000,participation:5000,courses:['Closure','Greffe','Perruque frange','Perruque 14×4'],includes:'Aiguilles gratuites',detail:{objectives:['Développer les bases nécessaires pour confectionner des perruques professionnellement.','Maîtriser les techniques de closure, greffe, perruque frange et 14×4.','Personnaliser et finir des perruques avec soin.','Acquérir une autonomie dans la réalisation complète de perruques.'],modules:[{title:'Technique 1 — Closure',content:'La closure est une pièce de dentelle qui permet de créer une finition naturelle. Préparer et positionner la closure, réaliser la couture et la fixation sur le bonnet, obtenir une finition propre et naturelle.'},{title:'Technique 2 — Greffe',content:'La greffe consiste à implanter ou fixer les mèches afin de construire une chevelure régulière et naturelle. Préparer le support, choisir l\'ordre et la direction des mèches, contrôler la densité.'},{title:'Technique 3 — Perruque frange',content:'La perruque frange est conçue avec une frange qui encadre le visage et donne un style moderne. Préparer la base, déterminer la longueur et la forme de la frange, réaliser la coupe et la mise en forme.'},{title:'Technique 4 — Perruque 14×4',content:'La perruque 14×4 utilise une zone de dentelle plus large à l\'avant pour offrir davantage de possibilités de coiffage. Préparer et positionner la dentelle, effectuer la couture, personnaliser la ligne de cheveux.'}],skills:['Confectionner des closures avec finition naturelle','Réaliser des greffes régulières et professionnelles','Créer des perruques frange modernes','Maîtriser la technique 14×4','Personnaliser et finir les perruques avec soin'],material:'Tête de mannequin, bonnet, aiguilles et fil, ciseaux, peigne/brosse, mèches ou cheveux, dentelle selon la technique et produits de finition.'}}
 ];
 
 var students = {};
 var currentStudent = null;
 
-// ============================================================
-// INITIALISATION SUPABASE
-// ============================================================
-function initSupabase() {
-    try {
-        if (typeof window.supabase !== 'undefined') {
-            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-            isSupabaseReady = true;
-            updateDbStatus(true);
-            console.log('✅ Supabase connecté avec succès');
-            return true;
-        }
-    } catch (e) {
-        console.error('Erreur Supabase:', e);
+function $(id) { return document.getElementById(id); }
+
+function showLoading(text) {
+    var overlay = $('loadingOverlay');
+    if (overlay) {
+        overlay.querySelector('.loading-text').textContent = text || 'Chargement...';
+        overlay.style.display = 'flex';
+        overlay.classList.remove('hidden');
     }
-    updateDbStatus(false);
-    return false;
+}
+
+function hideLoading() {
+    var overlay = $('loadingOverlay');
+    if (overlay) {
+        overlay.classList.add('hidden');
+        setTimeout(function() {
+            overlay.style.display = 'none';
+        }, 500);
+    }
+}
+
+function showAlert(title, message, icon) {
+    $('alertTitle').textContent = title;
+    $('alertMessage').textContent = message;
+    $('alertIcon').textContent = icon || '⚠️';
+    $('alertModal').classList.add('active');
+}
+
+function closeAlertModal() { $('alertModal').classList.remove('active'); }
+
+function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
 }
 
 function updateDbStatus(online) {
-    var statusEl = document.getElementById('dbStatus');
-    var dotEl = document.getElementById('dbDot');
-    var textEl = document.getElementById('dbStatusText');
+    var statusEl = $('dbStatus');
+    var dotEl = $('dbDot');
+    var textEl = $('dbStatusText');
     if (statusEl) {
         statusEl.style.display = 'flex';
         if (online) {
@@ -518,34 +527,50 @@ function updateDbStatus(online) {
     }
 }
 
-// ============================================================
-// FONCTIONS BASE DE DONNÉES SUPABASE
-// ============================================================
+function initSupabase() {
+    try {
+        if (typeof window.supabase !== 'undefined') {
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            isSupabaseReady = true;
+            updateDbStatus(true);
+            console.log('✅ Supabase connecté');
+            return true;
+        } else {
+            console.warn('⚠️ Supabase library non chargée');
+        }
+    } catch (e) {
+        console.error('Erreur Supabase:', e);
+        isSupabaseReady = false;
+    }
+    updateDbStatus(false);
+    return false;
+}
+
 async function dbGetStudents() {
     if (!isSupabaseReady || !supabase) return null;
     try {
         var response = await supabase.from('students').select('*').order('created_at', { ascending: false });
-        if (response.error) { console.warn('Erreur lecture students:', response.error.message); return null; }
+        if (response.error) { console.warn('Erreur lecture:', response.error.message); return null; }
         return response.data || [];
-    } catch (e) { console.error('Erreur dbGetStudents:', e); return null; }
+    } catch (e) { console.error('Erreur:', e); return null; }
 }
 
 async function dbInsertStudent(studentData) {
     if (!isSupabaseReady || !supabase) return null;
     try {
         var response = await supabase.from('students').insert([studentData]).select();
-        if (response.error) { console.warn('Erreur insertion student:', response.error.message); return null; }
+        if (response.error) { console.warn('Erreur insertion:', response.error.message); return null; }
         return response.data ? response.data[0] : null;
-    } catch (e) { console.error('Erreur dbInsertStudent:', e); return null; }
+    } catch (e) { console.error('Erreur:', e); return null; }
 }
 
 async function dbGetStudentByCode(code) {
     if (!isSupabaseReady || !supabase) return null;
     try {
         var response = await supabase.from('students').select('*').eq('code', code).single();
-        if (response.error) { console.warn('Erreur lecture student by code:', response.error.message); return null; }
+        if (response.error) { console.warn('Erreur:', response.error.message); return null; }
         return response.data;
-    } catch (e) { console.error('Erreur dbGetStudentByCode:', e); return null; }
+    } catch (e) { console.error('Erreur:', e); return null; }
 }
 
 async function syncStudentsToSupabase() {
@@ -566,38 +591,10 @@ async function syncStudentsToSupabase() {
                 });
             }
         }
-        console.log('✅ Étudiants synchronisés avec Supabase');
+        console.log('✅ Synchronisation terminée');
     } catch (e) { console.error('Erreur sync:', e); }
 }
 
-// ============================================================
-// UTILITAIRES
-// ============================================================
-function $(id) { return document.getElementById(id); }
-function showAlert(title, message, icon) {
-    $('alertTitle').textContent = title;
-    $('alertMessage').textContent = message;
-    $('alertIcon').textContent = icon || '⚠️';
-    $('alertModal').classList.add('active');
-}
-function closeAlertModal() { $('alertModal').classList.remove('active'); }
-function escapeHtml(str) {
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-}
-function showLoading(text) {
-    var overlay = $('loadingOverlay');
-    if (overlay) { overlay.querySelector('.loading-text').textContent = text || 'Chargement...'; overlay.style.display = 'flex'; }
-}
-function hideLoading() {
-    var overlay = $('loadingOverlay');
-    if (overlay) overlay.style.display = 'none';
-}
-
-// ============================================================
-// RENDU DES FORMATIONS
-// ============================================================
 function renderFormations() {
     var grid = $('formationsGrid');
     var html = '';
@@ -606,7 +603,7 @@ function renderFormations() {
         html += '<div class="formation-card"><div class="formation-image"><img src="' + f.image + '" alt="' + escapeHtml(f.name) + '" loading="lazy"><span class="formation-badge">' + escapeHtml(f.badge) + '</span></div>';
         html += '<div class="formation-content"><h3>' + escapeHtml(f.name) + '</h3><p>' + escapeHtml(f.shortDesc) + '</p>';
         html += '<div class="formation-details"><p><strong>⏱️ Durée:</strong> ' + escapeHtml(f.duration) + '</p><p><strong>🕐 Horaires:</strong> ' + escapeHtml(f.schedule) + '</p>';
-        if (f.includes) { html += '<p><strong>🎁 Inclus:</strong> ' + escapeHtml(f.includes) + '</p>'; }
+        if (f.includes) { html += '<p><strong> Inclus:</strong> ' + escapeHtml(f.includes) + '</p>'; }
         html += '</div><div class="formation-price">';
         html += '<div class="price-item"><div class="price-label">Inscription</div><div class="price">' + f.inscription + ' <span class="price-currency">G</span></div></div>';
         html += '<div class="price-item"><div class="price-label">Participation</div><div class="price">' + f.participation + ' <span class="price-currency">G</span></div></div></div>';
@@ -650,14 +647,14 @@ function showFormationDetail(formationId) {
         }
         contentHTML += '</div>';
     } else if (f.detail.modules) {
-        contentHTML += '<div class="detail-section"><h2>📚 Modules de formation</h2>';
+        contentHTML += '<div class="detail-section"><h2> Modules de formation</h2>';
         for (var m = 0; m < f.detail.modules.length; m++) {
             var md = f.detail.modules[m];
             contentHTML += '<div class="module-card"><h3><span class="module-num">' + (m + 1) + '</span>' + escapeHtml(md.title) + '</h3><p>' + escapeHtml(md.content) + '</p></div>';
         }
         contentHTML += '</div>';
     }
-    if (f.detail.material) { contentHTML += '<div class="detail-section"><h2>🧰 Matériel de base</h2><p>' + escapeHtml(f.detail.material) + '</p></div>'; }
+    if (f.detail.material) { contentHTML += '<div class="detail-section"><h2> Matériel de base</h2><p>' + escapeHtml(f.detail.material) + '</p></div>'; }
     contentHTML += '<div class="detail-section"><h2>🏆 Compétences acquises</h2><ul>';
     for (var s = 0; s < f.detail.skills.length; s++) { contentHTML += '<li>' + escapeHtml(f.detail.skills[s]) + '</li>'; }
     contentHTML += '</ul></div>';
@@ -689,9 +686,6 @@ function populateFormationSelect() {
     }
 }
 
-// ============================================================
-// NAVIGATION
-// ============================================================
 function showHome() {
     $('homePage').style.display = 'block';
     $('formationDetail').classList.remove('active');
@@ -739,9 +733,6 @@ function updatePaymentInfo() {
     }
 }
 
-// ============================================================
-// INSCRIPTION AVEC SUPABASE
-// ============================================================
 async function handleRegister(e) {
     e.preventDefault();
     var submitBtn = $('registerSubmitBtn');
@@ -778,7 +769,6 @@ async function handleRegister(e) {
         payment_method: payment, payment_number: paymentNumber
     };
 
-    // Sauvegarder en local d'abord (fallback)
     students[code] = {
         nom: nom, prenom: prenom, phone: phone, formation: formation.name, formationId: formationId,
         date: studentData.date, schedule: formation.schedule, duration: formation.duration,
@@ -786,10 +776,9 @@ async function handleRegister(e) {
         totalCourses: formation.courses.length, present: 0, absent: 0, late: 0
     };
 
-    // Sauvegarder dans Supabase
     var dbResult = await dbInsertStudent(studentData);
-    if (dbResult) { console.log('✅ Étudiant sauvegardé dans Supabase:', code); }
-    else { console.warn('⚠️ Sauvegarde Supabase échouée, données en cache local'); }
+    if (dbResult) { console.log('✅ Sauvegardé Supabase:', code); }
+    else { console.warn('⚠️ Mode offline'); }
 
     var paymentLabel = payment === 'natcash' ? 'Natcash' : 'Moncash';
     var message = '🎓 *NOUVELLE INSCRIPTION - NOVA INSTITUTE*\n\n👤 *Nom:* ' + nom + '\n👤 *Prénom:* ' + prenom + '\n📞 *Téléphone:* ' + phone + '\n📚 *Formation:* ' + formation.name + '\n⏱️ *Durée:* ' + formation.duration + '\n💰 *Inscription:* ' + formation.inscription + ' G\n💰 *Participation:* ' + formation.participation + ' G\n💰 *Montant total:* ' + (formation.inscription + formation.participation) + ' Goudes\n\n💳 *Mode de paiement:* ' + paymentLabel + '\n📱 *Numéro de paiement:* ' + paymentNumber + '\n\n🔑 *Code d\'accès:* ' + code + '\n\n📅 *Date:* ' + new Date().toLocaleDateString('fr-FR') + '\n⏰ *Heure:* ' + new Date().toLocaleTimeString('fr-FR') + '\n\n_Merci de confirmer cette inscription._';
@@ -805,35 +794,29 @@ async function handleRegister(e) {
     setTimeout(function() { window.open(whatsappURL, '_blank'); }, 500);
 }
 
-// ============================================================
-// CONNEXION AVEC SUPABASE
-// ============================================================
 async function handleLogin(e) {
     e.preventDefault();
     var codeInput = $('accessCode').value;
-    // Nettoyez le code : supprimez les espaces et mettez-le en majuscules
     var code = codeInput.trim().toUpperCase();
     
     var submitBtn = $('loginSubmitBtn');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Connexion...';
 
-    console.log('Tentative de connexion avec le code :', code); // Cela nous permet de voir ce que vous saisissez
+    console.log('Tentative connexion:', code);
 
-    // 1. Vérification initiale du code administrateur
     if (code === 'ADMIN-NOVA-2026') {
-        console.log('✅ Code administrateur reconnu !');
+        console.log('✅ Code Admin reconnu!');
         closeLogin();
         showAdminDashboard();
         submitBtn.disabled = false;
         submitBtn.textContent = 'Se connecter';
-        $('accessCode').value = ''; // Videz le champ
+        $('accessCode').value = '';
         return;
     }
 
-    // 2. Vérification dans la liste des étudiants locaux
     if (students[code]) {
-        console.log('✅ Étudiant local trouvé :', code);
+        console.log('✅ Étudiant local trouvé:', code);
         currentStudent = students[code];
         closeLogin();
         showStudentDashboard();
@@ -843,18 +826,12 @@ async function handleLogin(e) {
         return;
     }
 
-    // 3. Vérification dans Supabase (si la connexion est établie)
     if (isSupabaseReady && supabase) {
         try {
-            console.log('🔍 Recherche dans Supabase...');
-            var response = await supabase
-                .from('students')
-                .select('*')
-                .eq('code', code)
-                .single();
-
+            console.log('🔍 Recherche Supabase...');
+            var response = await supabase.from('students').select('*').eq('code', code).single();
             if (response.data) {
-                console.log('✅ Étudiant Supabase trouvé !');
+                console.log('✅ Étudiant Supabase trouvé!');
                 var dbStudent = response.data;
                 currentStudent = {
                     nom: dbStudent.nom, prenom: dbStudent.prenom || '', phone: dbStudent.phone || '',
@@ -872,45 +849,16 @@ async function handleLogin(e) {
                 return;
             }
         } catch (err) {
-            console.warn('Erreur lors de la recherche dans Supabase :', err);
+            console.warn('Erreur Supabase:', err);
         }
     }
 
-    // 4. Si rien ne fonctionne
-    console.log('❌ Code non valide !');
+    console.log('❌ Code invalide!');
     showAlert('Erreur', 'Code d\'accès invalide. Veuillez réessayer.', '❌');
     submitBtn.disabled = false;
     submitBtn.textContent = 'Se connecter';
 }
 
-    // Chercher dans Supabase
-    if (isSupabaseReady) {
-        var dbStudent = await dbGetStudentByCode(code);
-        if (dbStudent) {
-            currentStudent = {
-                nom: dbStudent.nom, prenom: dbStudent.prenom || '', phone: dbStudent.phone || '',
-                formation: dbStudent.formation, formationId: dbStudent.formation_id, date: dbStudent.date,
-                schedule: dbStudent.schedule, duration: dbStudent.duration, totalAmount: dbStudent.total_amount,
-                paidAmount: dbStudent.paid_amount, progress: dbStudent.progress, completedCourses: dbStudent.completed_courses,
-                totalCourses: dbStudent.total_courses, present: dbStudent.present, absent: dbStudent.absent, late: dbStudent.late
-            };
-            students[code] = currentStudent;
-            closeLogin();
-            showStudentDashboard();
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Se connecter';
-            return;
-        }
-    }
-
-    showAlert('Erreur', 'Code d\'accès invalide. Veuillez réessayer.', '❌');
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Se connecter';
-}
-
-// ============================================================
-// DASHBOARDS
-// ============================================================
 function showStudentDashboard() {
     $('homePage').style.display = 'none';
     $('formationDetail').classList.remove('active');
@@ -949,23 +897,24 @@ async function showAdminDashboard() {
     var keys = Object.keys(students);
     for (var i = 0; i < keys.length; i++) { allStudents.push({ code: keys[i], data: students[keys[i]] }); }
 
-    // Charger depuis Supabase si disponible
     if (isSupabaseReady) {
-        var dbStudents = await dbGetStudents();
-        if (dbStudents && dbStudents.length > 0) {
-            allStudents = [];
-            for (var j = 0; j < dbStudents.length; j++) {
-                var s = dbStudents[j];
-                allStudents.push({
-                    code: s.code, data: {
-                        nom: s.nom, prenom: s.prenom, phone: s.phone, formation: s.formation, formationId: s.formation_id,
-                        date: s.date, schedule: s.schedule, duration: s.duration, totalAmount: s.total_amount,
-                        paidAmount: s.paid_amount, progress: s.progress, completedCourses: s.completed_courses,
-                        totalCourses: s.total_courses, present: s.present, absent: s.absent, late: s.late
-                    }
-                });
+        try {
+            var dbStudents = await dbGetStudents();
+            if (dbStudents && dbStudents.length > 0) {
+                allStudents = [];
+                for (var j = 0; j < dbStudents.length; j++) {
+                    var s = dbStudents[j];
+                    allStudents.push({
+                        code: s.code, data: {
+                            nom: s.nom, prenom: s.prenom, phone: s.phone, formation: s.formation, formationId: s.formation_id,
+                            date: s.date, schedule: s.schedule, duration: s.duration, totalAmount: s.total_amount,
+                            paidAmount: s.paid_amount, progress: s.progress, completedCourses: s.completed_courses,
+                            totalCourses: s.total_courses, present: s.present, absent: s.absent, late: s.late
+                        }
+                    });
+                }
             }
-        }
+        } catch (e) { console.warn('Erreur chargement admin:', e); }
     }
 
     var totalStudents = allStudents.length;
@@ -979,7 +928,7 @@ async function showAdminDashboard() {
     var statsHTML = '';
     statsHTML += '<div class="admin-stat-card"><div class="stat-icon">👥</div><div class="stat-val">' + totalStudents + '</div><div class="stat-lbl">Total Étudiants</div></div>';
     statsHTML += '<div class="admin-stat-card"><div class="stat-icon">💰</div><div class="stat-val">' + totalPaid.toLocaleString() + ' G</div><div class="stat-lbl">Total Encaissé</div></div>';
-    statsHTML += '<div class="admin-stat-card"><div class="stat-icon">📊</div><div class="stat-val">' + (totalRevenue - totalPaid).toLocaleString() + ' G</div><div class="stat-lbl">Solde Restant</div></div>';
+    statsHTML += '<div class="admin-stat-card"><div class="stat-icon"></div><div class="stat-val">' + (totalRevenue - totalPaid).toLocaleString() + ' G</div><div class="stat-lbl">Solde Restant</div></div>';
     statsHTML += '<div class="admin-stat-card"><div class="stat-icon">🎓</div><div class="stat-val">' + formations.length + '</div><div class="stat-lbl">Formations Actives</div></div>';
     $('adminStatsGrid').innerHTML = statsHTML;
 
@@ -1006,7 +955,7 @@ async function showAdminDashboard() {
 
 function handleSectionClick() {
     var section = this.getAttribute('data-section');
-    showAlert('Section: ' + section, 'Fonctionnalité disponible prochainement.', '📋');
+    showAlert('Section: ' + section, 'Fonctionnalité disponible prochainement.', '');
 }
 
 function logout() {
@@ -1017,76 +966,6 @@ function logout() {
     window.scrollTo(0, 0);
 }
 
-// ============================================================
-// INITIALISATION
-// ============================================================
-async function init() {
-    try {
-        // Retire loading overlay imedyatman si gen pwoblèm
-        setTimeout(function() {
-            hideLoading();
-        }, 5000); // Maksimòm 5 segonn
-        
-        showLoading('Connexion à la base de données...');
-        
-        // Eseye konekte Supabase
-        var supabaseConnected = initSupabase();
-        
-        if (supabaseConnected) {
-            console.log('Tantativ chajeman depi Supabase...');
-            try {
-                var dbStudents = await dbGetStudents();
-                if (dbStudents && dbStudents.length > 0) {
-                    for (var i = 0; i < dbStudents.length; i++) {
-                        var s = dbStudents[i];
-                        students[s.code] = {
-                            nom: s.nom, prenom: s.prenom || '', phone: s.phone || '',
-                            formation: s.formation, formationId: s.formation_id,
-                            date: s.date, schedule: s.schedule, duration: s.duration,
-                            totalAmount: s.total_amount, paidAmount: s.paid_amount,
-                            progress: s.progress, completedCourses: s.completed_courses,
-                            totalCourses: s.total_courses, present: s.present,
-                            absent: s.absent, late: s.late
-                        };
-                    }
-                    console.log(dbStudents.length + ' etidyan chaje');
-                } else {
-                    await syncStudentsToSupabase();
-                }
-            } catch (dbError) {
-                console.warn('Erè Supabase, itilize mode offline:', dbError);
-                // Mode offline
-                var keys = Object.keys(CONFIG.STUDENT_CODES);
-                for (var j = 0; j < keys.length; j++) {
-                    students[keys[j]] = CONFIG.STUDENT_CODES[keys[j]];
-                }
-            }
-        } else {
-            // Mode offline
-            var keys = Object.keys(CONFIG.STUDENT_CODES);
-            for (var k = 0; k < keys.length; k++) {
-                students[keys[k]] = CONFIG.STUDENT_CODES[keys[k]];
-            }
-        }
-        
-        $('statStudents').textContent = Object.keys(students).length + '+';
-        $('statFormations').textContent = formations.length + '+';
-        
-        renderFormations();
-        populateFormationSelect();
-        addEventListeners();
-        
-        hideLoading();
-        console.log('✅ Sit la pare!');
-        
-    } catch (error) {
-        console.error('Erè fatal nan init():', error);
-        hideLoading();
-        showAlert('Erreur', 'Une erreur est survenue lors du chargement. Veuillez rafraîchir la page.', '');
-    }
-}
-
-// Fonksyon pou ajoute tout event listeners yo
 function addEventListeners() {
     $('logoLink').addEventListener('click', showHome);
     $('navHome').addEventListener('click', showHome);
@@ -1122,9 +1001,94 @@ function addEventListeners() {
         });
     }
 }
-    hideLoading();
+
+async function init() {
+    console.log('🚀 Démarrage Nova Institute...');
+    
+    // Timeout de sécurité: cacher loading après 5 secondes max
+    var loadingTimeout = setTimeout(function() {
+        console.warn('⏰ Timeout loading - affichage forcé');
+        hideLoading();
+    }, 5000);
+
+    try {
+        showLoading('Connexion à la base de données...');
+        
+        // Initialiser Supabase
+        initSupabase();
+        
+        // Charger les données
+        if (isSupabaseReady) {
+            console.log('Tentative chargement Supabase...');
+            try {
+                var dbStudents = await dbGetStudents();
+                if (dbStudents && dbStudents.length > 0) {
+                    for (var i = 0; i < dbStudents.length; i++) {
+                        var s = dbStudents[i];
+                        students[s.code] = {
+                            nom: s.nom, prenom: s.prenom || '', phone: s.phone || '',
+                            formation: s.formation, formationId: s.formation_id,
+                            date: s.date, schedule: s.schedule, duration: s.duration,
+                            totalAmount: s.total_amount, paidAmount: s.paid_amount,
+                            progress: s.progress, completedCourses: s.completed_courses,
+                            totalCourses: s.total_courses, present: s.present,
+                            absent: s.absent, late: s.late
+                        };
+                    }
+                    console.log('✅ ' + dbStudents.length + ' étudiants chargés');
+                } else {
+                    console.log('Base vide, synchronisation...');
+                    await syncStudentsToSupabase();
+                    var keys = Object.keys(CONFIG.STUDENT_CODES);
+                    for (var j = 0; j < keys.length; j++) {
+                        students[keys[j]] = CONFIG.STUDENT_CODES[keys[j]];
+                    }
+                }
+            } catch (dbError) {
+                console.warn('⚠️ Erreur Supabase, mode offline:', dbError);
+                var keys = Object.keys(CONFIG.STUDENT_CODES);
+                for (var k = 0; k < keys.length; k++) {
+                    students[keys[k]] = CONFIG.STUDENT_CODES[keys[k]];
+                }
+            }
+        } else {
+            console.log('📱 Mode offline activé');
+            var keys = Object.keys(CONFIG.STUDENT_CODES);
+            for (var l = 0; l < keys.length; l++) {
+                students[keys[l]] = CONFIG.STUDENT_CODES[keys[l]];
+            }
+        }
+
+        $('statStudents').textContent = Object.keys(students).length + '+';
+        $('statFormations').textContent = formations.length + '+';
+
+        renderFormations();
+        populateFormationSelect();
+        addEventListeners();
+
+        clearTimeout(loadingTimeout);
+        hideLoading();
+        console.log('✅ Site prêt!');
+        
+    } catch (error) {
+        console.error('❌ Erreur fatale:', error);
+        clearTimeout(loadingTimeout);
+        hideLoading();
+        
+        // Mode urgence: charger quand même
+        var keys = Object.keys(CONFIG.STUDENT_CODES);
+        for (var m = 0; m < keys.length; m++) {
+            students[keys[m]] = CONFIG.STUDENT_CODES[keys[m]];
+        }
+        renderFormations();
+        populateFormationSelect();
+        addEventListeners();
+        $('statStudents').textContent = keys.length + '+';
+        $('statFormations').textContent = formations.length + '+';
+    }
 }
 
+// Démarrer
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
 } else {
