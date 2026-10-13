@@ -810,28 +810,78 @@ async function handleRegister(e) {
 // ============================================================
 async function handleLogin(e) {
     e.preventDefault();
-    var code = $('accessCode').value.toUpperCase().trim();
+    var codeInput = $('accessCode').value;
+    // Nettoyez le code : supprimez les espaces et mettez-le en majuscules
+    var code = codeInput.trim().toUpperCase();
+    
     var submitBtn = $('loginSubmitBtn');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Connexion...';
 
-    if (code === CONFIG.ADMIN_CODE) {
+    console.log('Tentative de connexion avec le code :', code); // Cela nous permet de voir ce que vous saisissez
+
+    // 1. Vérification initiale du code administrateur
+    if (code === 'ADMIN-NOVA-2026') {
+        console.log('✅ Code administrateur reconnu !');
         closeLogin();
         showAdminDashboard();
         submitBtn.disabled = false;
         submitBtn.textContent = 'Se connecter';
+        $('accessCode').value = ''; // Videz le champ
         return;
     }
 
-    // Chercher d'abord en local
+    // 2. Vérification dans la liste des étudiants locaux
     if (students[code]) {
+        console.log('✅ Étudiant local trouvé :', code);
         currentStudent = students[code];
         closeLogin();
         showStudentDashboard();
         submitBtn.disabled = false;
         submitBtn.textContent = 'Se connecter';
+        $('accessCode').value = '';
         return;
     }
+
+    // 3. Vérification dans Supabase (si la connexion est établie)
+    if (isSupabaseReady && supabase) {
+        try {
+            console.log('🔍 Recherche dans Supabase...');
+            var response = await supabase
+                .from('students')
+                .select('*')
+                .eq('code', code)
+                .single();
+
+            if (response.data) {
+                console.log('✅ Étudiant Supabase trouvé !');
+                var dbStudent = response.data;
+                currentStudent = {
+                    nom: dbStudent.nom, prenom: dbStudent.prenom || '', phone: dbStudent.phone || '',
+                    formation: dbStudent.formation, formationId: dbStudent.formation_id, date: dbStudent.date,
+                    schedule: dbStudent.schedule, duration: dbStudent.duration, totalAmount: dbStudent.total_amount,
+                    paidAmount: dbStudent.paid_amount, progress: dbStudent.progress, completedCourses: dbStudent.completed_courses,
+                    totalCourses: dbStudent.total_courses, present: dbStudent.present, absent: dbStudent.absent, late: dbStudent.late
+                };
+                students[code] = currentStudent;
+                closeLogin();
+                showStudentDashboard();
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Se connecter';
+                $('accessCode').value = '';
+                return;
+            }
+        } catch (err) {
+            console.warn('Erreur lors de la recherche dans Supabase :', err);
+        }
+    }
+
+    // 4. Si rien ne fonctionne
+    console.log('❌ Code non valide !');
+    showAlert('Erreur', 'Code d\'accès invalide. Veuillez réessayer.', '❌');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Se connecter';
+}
 
     // Chercher dans Supabase
     if (isSupabaseReady) {
