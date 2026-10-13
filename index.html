@@ -49,14 +49,22 @@ nav a:hover{color:var(--gold)}
 .btn-info:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(33,150,243,0.4)}
 .btn:disabled{opacity:0.6;cursor:not-allowed}
 
-/* ===== HERO AVEC GRAPHISME AMÉLIORÉ ===== */
+/* ===== LOADING OVERLAY - FÒS KACHE APRE 3 SEGONN ===== */
+.loading-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(250,247,242,0.98);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.5s,visibility 0.5s}
+.loading-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loading-spinner{width:60px;height:60px;border:4px solid var(--cream-dark);border-top-color:var(--gold);border-right-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{margin-top:20px;color:var(--brown-main);font-weight:600;font-size:16px;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+/* ===== HERO ===== */
 .hero{background:var(--white);color:var(--brown-dark);padding:0;text-align:center;position:relative;overflow:hidden;border-bottom:3px solid var(--gold)}
 .hero-graphic{position:relative;height:420px;background:linear-gradient(135deg,#FAF7F2 0%,#F5EFE6 50%,#FAF7F2 100%);overflow:hidden}
 .hero-graphic::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 30% 50%,rgba(212,175,55,0.12) 0%,transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(109,76,65,0.08) 0%,transparent 50%)}
 .hero-graphic svg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
 .hero-content{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:60px 20px 40px}
-.hero-badge{display:inline-block;background:rgba(212,175,55,0.15);border:2px solid var(--gold);color:var(--brown-main);padding:8px 24px;border-radius:50px;font-size:13px;font-weight:600;margin-bottom:25px;letter-spacing:2px;text-transform:uppercase;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.hero-badge{display:inline-block;background:rgba(212,175,55,0.15);border:2px solid var(--gold);color:var(--brown-main);padding:8px 24px;border-radius:50px;font-size:13px;font-weight:600;margin-bottom:25px;letter-spacing:2px;text-transform:uppercase;animation:pulseBadge 2s infinite}
+@keyframes pulseBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 .hero h1{font-family:'Playfair Display',serif;font-size:56px;margin-bottom:20px;line-height:1.2;animation:fadeInUp 1s ease}
 .hero h1 .highlight{color:var(--gold);position:relative;display:inline-block}
 .hero h1 .highlight::after{content:'';position:absolute;bottom:-5px;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
@@ -69,7 +77,6 @@ nav a:hover{color:var(--gold)}
 .stat-number{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--gold);display:block}
 .stat-label{font-size:13px;opacity:0.7;margin-top:5px;text-transform:uppercase;letter-spacing:1px}
 
-/* ===== ANIMATIONS GRAPHIQUES ===== */
 .floating-shape{animation:float 6s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(5deg)}}
 .rotating{animation:rotate 20s linear infinite}
@@ -175,11 +182,62 @@ nav a:hover{color:var(--gold)}
 .payment-method-option input[type="radio"]:checked+label{border-color:var(--gold);background:var(--white);box-shadow:0 4px 15px rgba(212,175,55,0.2)}
 .payment-method-option label .method-icon{font-size:28px;margin-bottom:5px}
 .payment-method-option label .method-name{font-weight:600;color:var(--brown-dark);font-size:14px}
-.dashboard{display:none;max-width:1300px;margin:40px auto;padding:0 30px}
+
+/* ===== DASHBOARD ADMIN PREMIUM ===== */
+.dashboard{display:none;max-width:1400px;margin:40px auto;padding:0 30px}
 .dashboard.active{display:block}
-.dashboard-header{background:linear-gradient(135deg,var(--brown-dark),var(--brown-main));color:var(--white);padding:30px;border-radius:18px;margin-bottom:25px;display:flex;justify-content:space-between;align-items:center;position:relative;overflow:hidden;box-shadow:0 8px 30px var(--shadow-lg)}
-.dashboard-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 80% 20%,rgba(212,175,55,0.15) 0%,transparent 50%)}
+.dashboard-header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:var(--white);padding:40px;border-radius:24px;margin-bottom:30px;display:flex;justify-content:space-between;align-items:center;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(15,52,96,0.3)}
+.dashboard-header::before{content:'';position:absolute;top:-50%;right:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,0.15) 0%,transparent 70%);border-radius:50%}
+.dashboard-header::after{content:'';position:absolute;bottom:-30%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(212,175,55,0.1) 0%,transparent 70%);border-radius:50%}
 .dashboard-header>*{position:relative;z-index:2}
+.dashboard-header .student-info h2{font-family:'Playfair Display',serif;font-size:36px;margin-bottom:8px;color:var(--gold)}
+.dashboard-header .student-info p{color:rgba(255,255,255,0.8);font-size:16px}
+.dashboard-header .btn-secondary{background:rgba(255,255,255,0.1);color:var(--white);border:2px solid rgba(255,255,255,0.3);backdrop-filter:blur(10px)}
+.dashboard-header .btn-secondary:hover{background:var(--gold);color:var(--brown-dark);border-color:var(--gold)}
+
+/* Admin Stats Cards Premium */
+.admin-stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:30px}
+.admin-stat-card{background:var(--white);padding:25px;border-radius:20px;box-shadow:0 10px 30px var(--shadow);border:1px solid rgba(212,175,55,0.15);text-align:center;transition:all 0.4s;position:relative;overflow:hidden}
+.admin-stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
+.admin-stat-card:hover::before{transform:scaleX(1)}
+.admin-stat-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px var(--shadow-lg);border-color:var(--gold)}
+.admin-stat-card .stat-icon{font-size:40px;margin-bottom:12px;display:inline-block;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.admin-stat-card .stat-val{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--gold);margin-bottom:8px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.admin-stat-card .stat-lbl{font-size:12px;color:#666;text-transform:uppercase;letter-spacing:1.5px;font-weight:600}
+
+/* Tab Navigation Premium */
+.tab-nav{display:flex;gap:8px;margin-bottom:30px;flex-wrap:wrap;background:var(--white);padding:10px;border-radius:16px;box-shadow:0 4px 20px var(--shadow)}
+.tab-btn{padding:12px 24px;border:none;background:transparent;color:var(--brown-light);font-weight:600;cursor:pointer;border-radius:12px;transition:all 0.3s;font-family:'Poppins',sans-serif;font-size:14px;position:relative}
+.tab-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--brown-dark);box-shadow:0 4px 15px rgba(212,175,55,0.3)}
+.tab-btn:hover:not(.active){background:var(--cream)}
+.tab-content{display:none;animation:fadeIn 0.5s}
+.tab-content.active{display:block}
+
+/* Tables Premium */
+.admin-table-container{background:var(--white);padding:30px;border-radius:20px;box-shadow:0 10px 30px var(--shadow);border:1px solid rgba(212,175,55,0.15);overflow-x:auto;margin-bottom:25px}
+.admin-table-container h3{font-family:'Playfair Display',serif;font-size:24px;margin-bottom:25px;color:var(--brown-dark);display:flex;align-items:center;gap:10px}
+.admin-table{width:100%;border-collapse:collapse;min-width:700px}
+.admin-table thead{background:linear-gradient(135deg,var(--brown-dark),var(--brown-main))}
+.admin-table th{color:var(--gold);padding:16px 15px;text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600}
+.admin-table td{padding:16px 15px;border-bottom:1px solid var(--cream);font-size:14px;color:#555;transition:all 0.3s}
+.admin-table tbody tr{transition:all 0.3s}
+.admin-table tbody tr:hover{background:linear-gradient(90deg,var(--cream),var(--white));transform:scale(1.01)}
+.admin-table tbody tr:hover td{color:var(--brown-dark)}
+.admin-badge{display:inline-block;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase}
+.badge-paid{background:linear-gradient(135deg,#d4edda,#c3e6cb);color:#155724}
+.badge-pending{background:linear-gradient(135deg,#fff3cd,#ffeaa7);color:#856404}
+.badge-approved{background:linear-gradient(135deg,#d4edda,#c3e6cb);color:#155724}
+.badge-rejected{background:linear-gradient(135deg,#f8d7da,#f5c6cb);color:#721c24}
+.badge-waiting{background:linear-gradient(135deg,#e3f2fd,#bbdefb);color:#1976D2}
+.action-btns{display:flex;gap:6px;flex-wrap:wrap}
+.action-btns .btn{padding:8px 14px;font-size:12px;border-radius:10px;font-weight:600}
+
+/* Admin Actions Bar */
+.admin-actions-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;flex-wrap:wrap;gap:15px;padding-bottom:20px;border-bottom:2px solid var(--cream)}
+.admin-actions-bar h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--brown-dark);display:flex;align-items:center;gap:10px}
+
+/* Student Dashboard */
 .student-info h2{font-family:'Playfair Display',serif;font-size:32px;margin-bottom:8px}
 .quick-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-bottom:30px}
 .quick-action-btn{background:var(--white);padding:25px 15px;border-radius:15px;box-shadow:0 6px 25px var(--shadow);text-align:center;cursor:pointer;transition:all 0.3s;border:1px solid rgba(212,175,55,0.15);font-family:'Poppins',sans-serif;position:relative;overflow:hidden}
@@ -202,36 +260,13 @@ nav a:hover{color:var(--gold)}
 .status-present{background:#d4edda;color:#155724}
 .status-absent{background:#f8d7da;color:#721c24}
 .status-retard{background:#fff3cd;color:#856404}
-.status-pending{background:#e3f2fd;color:#1976D2}
-.status-approved{background:#d4edda;color:#155724}
-.status-rejected{background:#f8d7da;color:#721c24}
-.admin-stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-bottom:30px}
-.admin-stat-card{background:var(--white);padding:20px;border-radius:15px;box-shadow:0 6px 25px var(--shadow);border:1px solid rgba(212,175,55,0.15);text-align:center;transition:all 0.3s;position:relative;overflow:hidden}
-.admin-stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light))}
-.admin-stat-card:hover{transform:translateY(-5px);box-shadow:0 12px 35px var(--shadow-lg)}
-.admin-stat-card .stat-icon{font-size:32px;margin-bottom:8px}
-.admin-stat-card .stat-val{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gold);margin-bottom:5px}
-.admin-stat-card .stat-lbl{font-size:12px;color:#666;text-transform:uppercase;letter-spacing:1px}
-.admin-table-container{background:var(--white);padding:25px;border-radius:18px;box-shadow:0 6px 25px var(--shadow);border:1px solid rgba(212,175,55,0.15);overflow-x:auto;margin-bottom:25px}
-.admin-table{width:100%;border-collapse:collapse;min-width:600px}
-.admin-table th{background:var(--cream);color:var(--brown-dark);padding:12px 15px;text-align:left;font-size:13px;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid var(--gold)}
-.admin-table td{padding:12px 15px;border-bottom:1px solid var(--cream);font-size:14px;color:#555}
-.admin-table tr:hover td{background:var(--cream)}
-.admin-badge{display:inline-block;padding:4px 10px;border-radius:15px;font-size:11px;font-weight:600;letter-spacing:0.5px}
-.badge-paid{background:#d4edda;color:#155724}
-.badge-pending{background:#fff3cd;color:#856404}
-.badge-approved{background:#d4edda;color:#155724}
-.badge-rejected{background:#f8d7da;color:#721c24}
-.badge-waiting{background:#e3f2fd;color:#1976D2}
-.action-btns{display:flex;gap:5px;flex-wrap:wrap}
-.action-btns .btn{padding:6px 12px;font-size:12px;border-radius:8px}
-.admin-actions-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:15px}
-.admin-actions-bar h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--brown-dark)}
-.loading-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(250,247,242,0.98);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.5s}
-.loading-overlay.hidden{opacity:0;pointer-events:none}
-.loading-spinner{width:50px;height:50px;border:4px solid var(--cream-dark);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading-text{margin-top:15px;color:var(--brown-main);font-weight:600;font-size:16px}
+.student-doc{background:var(--cream);padding:20px;border-radius:12px;margin-bottom:15px;border-left:4px solid var(--gold)}
+.student-doc h4{color:var(--brown-main);margin-bottom:10px;font-family:'Playfair Display',serif}
+.student-doc p{color:#555;line-height:1.7;font-size:14px}
+.notification-item{padding:12px;border-left:3px solid var(--gold);background:var(--cream);border-radius:8px;margin-bottom:10px}
+.notification-item .notif-title{font-weight:600;color:var(--brown-dark);margin-bottom:5px}
+.notification-item .notif-text{font-size:13px;color:#666}
+.notification-item .notif-date{font-size:11px;color:#999;margin-top:5px}
 footer{background:var(--white);color:var(--brown-dark);padding:50px 30px 25px;margin-top:70px;position:relative;border-top:3px solid var(--gold)}
 .footer-content{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:35px}
 .footer-section h3{margin-bottom:15px;color:var(--gold);font-family:'Playfair Display',serif;font-size:20px}
@@ -246,23 +281,11 @@ footer{background:var(--white);color:var(--brown-dark);padding:50px 30px 25px;ma
 .db-status{position:fixed;bottom:20px;right:20px;background:var(--white);padding:10px 15px;border-radius:10px;box-shadow:0 4px 15px var(--shadow);font-size:12px;z-index:500;display:flex;align-items:center;gap:8px;border:1px solid var(--cream-dark)}
 .db-status .dot{width:8px;height:8px;border-radius:50%;background:#4CAF50}
 .db-status .dot.offline{background:#f44336}
-.tab-nav{display:flex;gap:10px;margin-bottom:25px;flex-wrap:wrap;border-bottom:2px solid var(--cream);padding-bottom:10px}
-.tab-btn{padding:10px 20px;border:none;background:transparent;color:var(--brown-light);font-weight:600;cursor:pointer;border-radius:8px 8px 0 0;transition:all 0.3s;font-family:'Poppins',sans-serif;font-size:14px}
-.tab-btn.active{background:var(--gold);color:var(--brown-dark)}
-.tab-btn:hover{background:var(--cream)}
-.tab-content{display:none}
-.tab-content.active{display:block}
-.student-doc{background:var(--cream);padding:20px;border-radius:12px;margin-bottom:15px;border-left:4px solid var(--gold)}
-.student-doc h4{color:var(--brown-main);margin-bottom:10px;font-family:'Playfair Display',serif}
-.student-doc p{color:#555;line-height:1.7;font-size:14px}
-.notification-item{padding:12px;border-left:3px solid var(--gold);background:var(--cream);border-radius:8px;margin-bottom:10px}
-.notification-item .notif-title{font-weight:600;color:var(--brown-dark);margin-bottom:5px}
-.notification-item .notif-text{font-size:13px;color:#666}
-.notification-item .notif-date{font-size:11px;color:#999;margin-top:5px}
-@media (max-width:768px){.hero-graphic{height:350px}.hero h1{font-size:34px}.hero p{font-size:16px}.hero-stats{gap:25px}.stat-number{font-size:32px}nav{gap:12px}.dashboard-header{flex-direction:column;text-align:center;gap:15px}.quick-actions{grid-template-columns:repeat(2,1fr)}.detail-hero h1{font-size:28px}.detail-hero .icon-large{font-size:70px}.detail-info-bar{gap:15px}.formation-buttons{flex-direction:column}.section-title{font-size:28px}.logo{font-size:22px}.logo-icon{width:35px;height:35px;font-size:18px}.payment-methods{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
+@media (max-width:768px){.hero-graphic{height:350px}.hero h1{font-size:34px}.hero p{font-size:16px}.hero-stats{gap:25px}.stat-number{font-size:32px}nav{gap:12px}.dashboard-header{flex-direction:column;text-align:center;gap:15px;padding:25px}.dashboard-header .student-info h2{font-size:26px}.quick-actions{grid-template-columns:repeat(2,1fr)}.detail-hero h1{font-size:28px}.detail-hero .icon-large{font-size:70px}.detail-info-bar{gap:15px}.formation-buttons{flex-direction:column}.section-title{font-size:28px}.logo{font-size:22px}.logo-icon{width:35px;height:35px;font-size:18px}.payment-methods{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.admin-stats-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
+
 <div class="loading-overlay" id="loadingOverlay">
 <div class="loading-spinner"></div>
 <div class="loading-text">Connexion à Nova Institute...</div>
@@ -292,46 +315,22 @@ Nova<span>Institute</span>
 </header>
 
 <div id="homePage">
-
-<!-- ===== HERO AVEC GRAPHISME AMÉLIORÉ ===== -->
 <section class="hero">
 <div class="hero-graphic">
 <svg viewBox="0 0 1200 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
 <defs>
-<linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-<stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
-<stop offset="100%" style="stop-color:#F4E5B0;stop-opacity:1" />
-</linearGradient>
-<linearGradient id="brownGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-<stop offset="0%" style="stop-color:#6D4C41;stop-opacity:0.3" />
-<stop offset="100%" style="stop-color:#8D6E63;stop-opacity:0.1" />
-</linearGradient>
-<radialGradient id="circleGrad" cx="50%" cy="50%" r="50%">
-<stop offset="0%" style="stop-color:#D4AF37;stop-opacity:0.4" />
-<stop offset="100%" style="stop-color:#D4AF37;stop-opacity:0" />
-</radialGradient>
-<filter id="glow">
-<feGaussianBlur stdDeviation="3" result="blur" />
-<feMerge>
-<feMergeNode in="blur" />
-<feMergeNode in="SourceGraphic" />
-</feMerge>
-</filter>
+<linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" /><stop offset="100%" style="stop-color:#F4E5B0;stop-opacity:1" /></linearGradient>
+<radialGradient id="circleGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:#D4AF37;stop-opacity:0.4" /><stop offset="100%" style="stop-color:#D4AF37;stop-opacity:0" /></radialGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="3" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
 </defs>
-
-<!-- Cercles décoratifs flottants -->
 <circle cx="100" cy="80" r="60" fill="url(#circleGrad)" class="floating-shape" style="animation-delay:0s"/>
 <circle cx="1100" cy="100" r="80" fill="url(#circleGrad)" class="floating-shape" style="animation-delay:1s"/>
 <circle cx="600" cy="350" r="100" fill="url(#circleGrad)" class="floating-shape" style="animation-delay:2s"/>
 <circle cx="250" cy="300" r="50" fill="url(#circleGrad)" class="floating-shape" style="animation-delay:0.5s"/>
 <circle cx="950" cy="300" r="60" fill="url(#circleGrad)" class="floating-shape" style="animation-delay:1.5s"/>
-
-<!-- Lignes ondulées dorées -->
-<path d="M0,200 Q200,150 400,200 T800,200 T1200,200" stroke="url(#goldGrad)" stroke-width="2" fill="none" opacity="0.4" class="floating-shape" style="animation-delay:0s"/>
+<path d="M0,200 Q200,150 400,200 T800,200 T1200,200" stroke="url(#goldGrad)" stroke-width="2" fill="none" opacity="0.4" class="floating-shape"/>
 <path d="M0,250 Q200,300 400,250 T800,250 T1200,250" stroke="url(#goldGrad)" stroke-width="1.5" fill="none" opacity="0.3" class="floating-shape" style="animation-delay:1s"/>
 <path d="M0,150 Q300,100 600,150 T1200,150" stroke="url(#goldGrad)" stroke-width="1" fill="none" opacity="0.25"/>
-
-<!-- Étoiles / étincelles -->
 <g class="sparkle" style="animation-delay:0s"><circle cx="150" cy="120" r="3" fill="#D4AF37" filter="url(#glow)"/></g>
 <g class="sparkle" style="animation-delay:0.5s"><circle cx="350" cy="80" r="2" fill="#D4AF37" filter="url(#glow)"/></g>
 <g class="sparkle" style="animation-delay:1s"><circle cx="550" cy="150" r="3" fill="#D4AF37" filter="url(#glow)"/></g>
@@ -341,34 +340,14 @@ Nova<span>Institute</span>
 <g class="sparkle" style="animation-delay:0.3s"><circle cx="200" cy="280" r="2" fill="#D4AF37" filter="url(#glow)"/></g>
 <g class="sparkle" style="animation-delay:1.2s"><circle cx="450" cy="320" r="3" fill="#D4AF37" filter="url(#glow)"/></g>
 <g class="sparkle" style="animation-delay:2.2s"><circle cx="850" cy="300" r="2" fill="#D4AF37" filter="url(#glow)"/></g>
-
-<!-- Formes géométriques décoratives -->
-<g class="rotating" style="transform-origin:180px 180px">
-<rect x="160" y="160" width="40" height="40" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.3" transform="rotate(45 180 180)"/>
-</g>
-<g class="rotating" style="transform-origin:1020px 150px;animation-direction:reverse">
-<rect x="1000" y="130" width="40" height="40" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.3" transform="rotate(45 1020 150)"/>
-</g>
-<g class="rotating" style="transform-origin:600px 100px">
-<polygon points="600,80 620,120 580,120" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.3"/>
-</g>
-
-<!-- Icônes flottantes (livre, diplôme, étoile) -->
-<g class="floating-shape" style="animation-delay:0.5s" opacity="0.2">
-<text x="300" y="150" font-size="40">📚</text>
-</g>
-<g class="floating-shape" style="animation-delay:1.5s" opacity="0.2">
-<text x="900" y="180" font-size="40">🎓</text>
-</g>
-<g class="floating-shape" style="animation-delay:2.5s" opacity="0.2">
-<text x="500" y="280" font-size="40">⭐</text>
-</g>
-<g class="floating-shape" style="animation-delay:1s" opacity="0.2">
-<text x="750" y="120" font-size="40">🏆</text>
-</g>
+<g class="rotating" style="transform-origin:180px 180px"><rect x="160" y="160" width="40" height="40" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.3" transform="rotate(45 180 180)"/></g>
+<g class="rotating" style="transform-origin:1020px 150px;animation-direction:reverse"><rect x="1000" y="130" width="40" height="40" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.3" transform="rotate(45 1020 150)"/></g>
+<g class="floating-shape" style="animation-delay:0.5s" opacity="0.2"><text x="300" y="150" font-size="40"></text></g>
+<g class="floating-shape" style="animation-delay:1.5s" opacity="0.2"><text x="900" y="180" font-size="40">🎓</text></g>
+<g class="floating-shape" style="animation-delay:2.5s" opacity="0.2"><text x="500" y="280" font-size="40">⭐</text></g>
+<g class="floating-shape" style="animation-delay:1s" opacity="0.2"><text x="750" y="120" font-size="40">🏆</text></g>
 </svg>
 </div>
-
 <div class="hero-content">
 <div class="hero-badge">✨ Excellence & Professionnalisme</div>
 <h1>Bienvenue chez <span class="highlight">Nova Institute</span></h1>
@@ -393,9 +372,9 @@ Nova<span>Institute</span>
 <p class="section-description">Nous nous engageons à offrir une formation de qualité qui prépare nos étudiants à réussir dans leur domaine professionnel</p>
 </div>
 <div class="objectives-grid">
-<div class="objective-card"><div class="objective-icon">🎯</div><h3>Formation Pratique</h3><p>Apprentissage concret avec des exercices pratiques et des projets réels pour une maîtrise complète</p></div>
+<div class="objective-card"><div class="objective-icon"></div><h3>Formation Pratique</h3><p>Apprentissage concret avec des exercices pratiques et des projets réels pour une maîtrise complète</p></div>
 <div class="objective-card"><div class="objective-icon">💼</div><h3>Insertion Professionnelle</h3><p>Préparation à l'entrepreneuriat et au marché du travail avec un accompagnement personnalisé</p></div>
-<div class="objective-card"><div class="objective-icon">🏆</div><h3>Excellence</h3><p>Formation de qualité dispensée par des professionnels expérimentés et passionnés</p></div>
+<div class="objective-card"><div class="objective-icon"></div><h3>Excellence</h3><p>Formation de qualité dispensée par des professionnels expérimentés et passionnés</p></div>
 <div class="objective-card"><div class="objective-icon">🤝</div><h3>Accompagnement</h3><p>Suivi personnalisé et support continu pour chaque étudiant tout au long de sa formation</p></div>
 </div>
 </section>
@@ -425,7 +404,6 @@ Nova<span>Institute</span>
 
 <div class="formation-detail" id="formationDetail"></div>
 
-<!-- ===== DASHBOARD ÉTUDIANT ===== -->
 <div class="dashboard" id="studentDashboard">
 <div class="dashboard-header">
 <div class="student-info">
@@ -442,7 +420,6 @@ Nova<span>Institute</span>
 <button class="quick-action-btn" data-tab="tab-documents" type="button"><div class="icon">📄</div><h3>Documents</h3></button>
 <button class="quick-action-btn" data-tab="tab-contact" type="button"><div class="icon">📞</div><h3>Contact</h3></button>
 </div>
-
 <div class="tab-content active" id="tab-profil">
 <div class="dashboard-sections">
 <div class="dashboard-card">
@@ -455,7 +432,7 @@ Nova<span>Institute</span>
 <div class="info-row"><span class="info-label">Horaires:</span><span class="info-value" id="profileSchedule">-</span></div>
 </div>
 <div class="dashboard-card">
-<h3>📊 Ma Progression Globale</h3>
+<h3> Ma Progression Globale</h3>
 <p style="margin-bottom:8px;">Progression globale</p>
 <div class="progress-bar"><div class="progress-fill" id="progressBar" style="width:0%">0%</div></div>
 <div class="info-row"><span class="info-label">Cours terminés:</span><span class="info-value" id="completedCourses">0/0</span></div>
@@ -464,34 +441,15 @@ Nova<span>Institute</span>
 </div>
 </div>
 </div>
-
-<div class="tab-content" id="tab-formation">
-<div class="dashboard-card" style="margin-bottom:20px;">
-<h3> Ma Formation</h3>
-<div id="studentFormationDetails"></div>
-</div>
-</div>
-
+<div class="tab-content" id="tab-formation"><div class="dashboard-card" style="margin-bottom:20px;"><h3>📚 Ma Formation</h3><div id="studentFormationDetails"></div></div></div>
 <div class="tab-content" id="tab-progression">
 <div class="dashboard-sections">
-<div class="dashboard-card">
-<h3>📊 Progression</h3>
-<p style="margin-bottom:8px;">Progression globale</p>
-<div class="progress-bar"><div class="progress-fill" id="progressBar2" style="width:0%">0%</div></div>
-<div class="info-row"><span class="info-label">Cours terminés:</span><span class="info-value" id="completedCourses2">0/0</span></div>
-</div>
-<div class="dashboard-card">
-<h3>🕐 Mes Présences</h3>
-<div class="info-row"><span class="info-label">Présent:</span><span class="info-value status-badge status-present" id="presentCount">0</span></div>
-<div class="info-row"><span class="info-label">Absent:</span><span class="info-value status-badge status-absent" id="absentCount">0</span></div>
-<div class="info-row"><span class="info-label">Retard:</span><span class="info-value status-badge status-retard" id="lateCount">0</span></div>
+<div class="dashboard-card"><h3>📊 Progression</h3><p style="margin-bottom:8px;">Progression globale</p><div class="progress-bar"><div class="progress-fill" id="progressBar2" style="width:0%">0%</div></div><div class="info-row"><span class="info-label">Cours terminés:</span><span class="info-value" id="completedCourses2">0/0</span></div></div>
+<div class="dashboard-card"><h3>🕐 Mes Présences</h3><div class="info-row"><span class="info-label">Présent:</span><span class="info-value status-badge status-present" id="presentCount">0</span></div><div class="info-row"><span class="info-label">Absent:</span><span class="info-value status-badge status-absent" id="absentCount">0</span></div><div class="info-row"><span class="info-label">Retard:</span><span class="info-value status-badge status-retard" id="lateCount">0</span></div></div>
 </div>
 </div>
-</div>
-
 <div class="tab-content" id="tab-paiements">
-<div class="dashboard-card">
-<h3> Mes Paiements</h3>
+<div class="dashboard-card"><h3> Mes Paiements</h3>
 <div class="info-row"><span class="info-label">Montant total:</span><span class="info-value" id="totalAmount">0 G</span></div>
 <div class="info-row"><span class="info-label">Déjà versé:</span><span class="info-value" id="paidAmount">0 G</span></div>
 <div class="info-row"><span class="info-label">Solde restant:</span><span class="info-value" id="remainingAmount">0 G</span></div>
@@ -502,235 +460,87 @@ Nova<span>Institute</span>
 </div>
 </div>
 </div>
-
-<div class="tab-content" id="tab-documents">
-<div class="dashboard-card">
-<h3>📄 Documents de Formation</h3>
-<div id="studentDocuments"></div>
-</div>
-</div>
-
+<div class="tab-content" id="tab-documents"><div class="dashboard-card"><h3> Documents de Formation</h3><div id="studentDocuments"></div></div></div>
 <div class="tab-content" id="tab-contact">
-<div class="dashboard-card">
-<h3>📞 Contact & Support</h3>
+<div class="dashboard-card"><h3>📞 Contact & Support</h3>
 <div class="info-row"><span class="info-label">WhatsApp:</span><span class="info-value">33552907</span></div>
 <div class="info-row"><span class="info-label">Téléphone:</span><span class="info-value">58046408 / 44699777</span></div>
 <div class="info-row"><span class="info-label">Email:</span><span class="info-value">institutenova61@gmail.com</span></div>
 <div class="info-row"><span class="info-label">Adresse:</span><span class="info-value">Cité Militaire / L'École Foi d'Abraham</span></div>
 <div style="margin-top:20px;">
 <h4 style="color:var(--brown-main);margin-bottom:10px;">📢 Notifications</h4>
-<div class="notification-item">
-<div class="notif-title">Bienvenue!</div>
-<div class="notif-text">Votre inscription a été confirmée par l'administration.</div>
-<div class="notif-date">Aujourd'hui</div>
-</div>
-<div class="notification-item">
-<div class="notif-title">Horaires de cours</div>
-<div class="notif-text">Consultez les horaires de votre formation dans l'onglet Ma Formation.</div>
-<div class="notif-date">Aujourd'hui</div>
-</div>
+<div class="notification-item"><div class="notif-title">Bienvenue!</div><div class="notif-text">Votre inscription a été confirmée par l'administration.</div><div class="notif-date">Aujourd'hui</div></div>
+<div class="notification-item"><div class="notif-title">Horaires de cours</div><div class="notif-text">Consultez les horaires de votre formation dans l'onglet Ma Formation.</div><div class="notif-date">Aujourd'hui</div></div>
 </div>
 </div>
 </div>
 </div>
 
-<!-- ===== DASHBOARD ADMIN ===== -->
 <div class="dashboard" id="adminDashboard">
-<div class="dashboard-header" style="background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--brown-dark);">
+<div class="dashboard-header">
 <div class="student-info">
-<h2 style="color:var(--brown-dark);">🛡️ Tableau de Bord Administratif</h2>
-<p style="color:var(--brown-dark);opacity:0.8;">Gestion Nova Institute - Supabase</p>
+<h2>🛡️ Tableau de Bord Administratif</h2>
+<p>Gestion Nova Institute - Supabase</p>
 </div>
 <button class="btn btn-secondary" id="btnAdminLogout" type="button">Déconnexion</button>
 </div>
-
 <div class="admin-stats-grid" id="adminStatsGrid"></div>
-
 <div class="tab-nav">
 <button class="tab-btn active" data-admintab="adm-pending">⏳ En attente (<span id="countPending">0</span>)</button>
 <button class="tab-btn" data-admintab="adm-approved">✅ Approuvés (<span id="countApproved">0</span>)</button>
-<button class="tab-btn" data-admintab="adm-all">📋 Tous les étudiants</button>
-<button class="tab-btn" data-admintab="adm-add">➕ Ajouter étudiant</button>
+<button class="tab-btn" data-admintab="adm-all"> Tous les étudiants</button>
+<button class="tab-btn" data-admintab="adm-add"> Ajouter étudiant</button>
 <button class="tab-btn" data-admintab="adm-stats"> Statistiques</button>
 </div>
-
 <div class="tab-content active" id="adm-pending">
 <div class="admin-table-container">
-<div class="admin-actions-bar">
-<h3>⏳ Inscriptions en attente d'approbation</h3>
-</div>
-<table class="admin-table">
-<thead><tr><th>Code</th><th>Nom</th><th>Téléphone</th><th>Formation</th><th>Montant</th><th>Paiement</th><th>Date</th><th>Actions</th></tr></thead>
-<tbody id="pendingTableBody"></tbody>
-</table>
+<div class="admin-actions-bar"><h3>⏳ Inscriptions en attente d'approbation</h3></div>
+<table class="admin-table"><thead><tr><th>Code</th><th>Nom</th><th>Téléphone</th><th>Formation</th><th>Montant</th><th>Paiement</th><th>Date</th><th>Actions</th></tr></thead><tbody id="pendingTableBody"></tbody></table>
 </div>
 </div>
-
 <div class="tab-content" id="adm-approved">
 <div class="admin-table-container">
-<div class="admin-actions-bar">
-<h3>✅ Étudiants approuvés</h3>
-</div>
-<table class="admin-table">
-<thead><tr><th>Code</th><th>Nom</th><th>Téléphone</th><th>Formation</th><th>Progression</th><th>Statut</th><th>Actions</th></tr></thead>
-<tbody id="approvedTableBody"></tbody>
-</table>
+<div class="admin-actions-bar"><h3>✅ Étudiants approuvés</h3></div>
+<table class="admin-table"><thead><tr><th>Code</th><th>Nom</th><th>Téléphone</th><th>Formation</th><th>Progression</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="approvedTableBody"></tbody></table>
 </div>
 </div>
-
 <div class="tab-content" id="adm-all">
 <div class="admin-table-container">
-<div class="admin-actions-bar">
-<h3>📋 Tous les étudiants</h3>
-<button class="btn btn-info" id="btnAddStudentFromAll" type="button">➕ Ajouter un étudiant</button>
-</div>
-<table class="admin-table">
-<thead><tr><th>Code</th><th>Nom Complet</th><th>Téléphone</th><th>Formation</th><th>Montant Total</th><th>Payé</th><th>Statut</th><th>Date</th><th>Actions</th></tr></thead>
-<tbody id="allTableBody"></tbody>
-</table>
+<div class="admin-actions-bar"><h3>📋 Tous les étudiants</h3><button class="btn btn-info" id="btnAddStudentFromAll" type="button">➕ Ajouter un étudiant</button></div>
+<table class="admin-table"><thead><tr><th>Code</th><th>Nom Complet</th><th>Téléphone</th><th>Formation</th><th>Montant Total</th><th>Payé</th><th>Statut</th><th>Date</th><th>Actions</th></tr></thead><tbody id="allTableBody"></tbody></table>
 </div>
 </div>
-
-<!-- ===== NOUVEAU: Onglet Ajouter Étudiant ===== -->
 <div class="tab-content" id="adm-add">
 <div class="dashboard-card" style="max-width:700px;margin:0 auto;">
-<h3 style="font-family:'Playfair Display',serif;font-size:24px;margin-bottom:20px;color:var(--brown-dark);"> Ajouter un étudiant directement</h3>
+<h3 style="font-family:'Playfair Display',serif;font-size:24px;margin-bottom:20px;color:var(--brown-dark);">➕ Ajouter un étudiant directement</h3>
 <p style="color:#666;margin-bottom:20px;font-size:14px;">Remplissez ce formulaire pour ajouter directement un étudiant avec un code d'accès. L'étudiant pourra se connecter immédiatement.</p>
 <form id="adminAddStudentForm">
-<div class="form-row">
-<div class="form-group"><label for="addNom">Nom *</label><input type="text" id="addNom" required></div>
-<div class="form-group"><label for="addPrenom">Prénom *</label><input type="text" id="addPrenom" required></div>
-</div>
-<div class="form-row">
-<div class="form-group"><label for="addPhone">Téléphone *</label><input type="tel" id="addPhone" required></div>
-<div class="form-group"><label for="addFormation">Formation *</label><select id="addFormation" required><option value="">Sélectionnez une formation</option></select></div>
-</div>
-<div class="form-row">
-<div class="form-group"><label for="addTotalAmount">Montant total (G) *</label><input type="number" id="addTotalAmount" required min="0"></div>
-<div class="form-group"><label for="addPaidAmount">Déjà payé (G)</label><input type="number" id="addPaidAmount" value="0" min="0"></div>
-</div>
-<div class="form-row">
-<div class="form-group"><label for="addDuration">Durée</label><input type="text" id="addDuration" placeholder="ex: 2 mois"></div>
-<div class="form-group"><label for="addSchedule">Horaires</label><input type="text" id="addSchedule" placeholder="ex: 9h - 1h"></div>
-</div>
-<div class="form-row">
-<div class="form-group"><label for="addPaymentMethod">Mode de paiement</label>
-<select id="addPaymentMethod">
-<option value="natcash">💳 Natcash</option>
-<option value="moncash">💰 Moncash</option>
-</select>
-</div>
-<div class="form-group"><label for="addPaymentNumber">Numéro de paiement</label><input type="text" id="addPaymentNumber" placeholder="Numéro utilisé"></div>
-</div>
-<div class="form-group">
-<label for="addCustomCode">Code d'accès personnalisé (optionnel)</label>
-<input type="text" id="addCustomCode" placeholder="Laissez vide pour générer automatiquement">
-<p style="font-size:12px;color:#888;margin-top:5px;">Si vide, un code sera généré automatiquement (ex: NOVA12345678)</p>
-</div>
-<div class="form-group">
-<label for="addProgress">Progression (%)</label>
-<input type="number" id="addProgress" value="0" min="0" max="100">
-</div>
-<div style="display:flex;gap:10px;margin-top:20px;">
-<button type="submit" class="btn btn-success" style="flex:1;">✅ Ajouter l'étudiant</button>
-<button type="button" class="btn btn-secondary" id="resetAddForm" style="flex:1;">🔄 Réinitialiser</button>
-</div>
+<div class="form-row"><div class="form-group"><label for="addNom">Nom *</label><input type="text" id="addNom" required></div><div class="form-group"><label for="addPrenom">Prénom *</label><input type="text" id="addPrenom" required></div></div>
+<div class="form-row"><div class="form-group"><label for="addPhone">Téléphone *</label><input type="tel" id="addPhone" required></div><div class="form-group"><label for="addFormation">Formation *</label><select id="addFormation" required><option value="">Sélectionnez une formation</option></select></div></div>
+<div class="form-row"><div class="form-group"><label for="addTotalAmount">Montant total (G) *</label><input type="number" id="addTotalAmount" required min="0"></div><div class="form-group"><label for="addPaidAmount">Déjà payé (G)</label><input type="number" id="addPaidAmount" value="0" min="0"></div></div>
+<div class="form-row"><div class="form-group"><label for="addDuration">Durée</label><input type="text" id="addDuration" placeholder="ex: 2 mois"></div><div class="form-group"><label for="addSchedule">Horaires</label><input type="text" id="addSchedule" placeholder="ex: 9h - 1h"></div></div>
+<div class="form-row"><div class="form-group"><label for="addPaymentMethod">Mode de paiement</label><select id="addPaymentMethod"><option value="natcash">💳 Natcash</option><option value="moncash">💰 Moncash</option></select></div><div class="form-group"><label for="addPaymentNumber">Numéro de paiement</label><input type="text" id="addPaymentNumber" placeholder="Numéro utilisé"></div></div>
+<div class="form-group"><label for="addCustomCode">Code d'accès personnalisé (optionnel)</label><input type="text" id="addCustomCode" placeholder="Laissez vide pour générer automatiquement"><p style="font-size:12px;color:#888;margin-top:5px;">Si vide, un code sera généré automatiquement (ex: NOVA12345678)</p></div>
+<div class="form-group"><label for="addProgress">Progression (%)</label><input type="number" id="addProgress" value="0" min="0" max="100"></div>
+<div style="display:flex;gap:10px;margin-top:20px;"><button type="submit" class="btn btn-success" style="flex:1;">✅ Ajouter l'étudiant</button><button type="button" class="btn btn-secondary" id="resetAddForm" style="flex:1;">🔄 Réinitialiser</button></div>
 </form>
 </div>
 </div>
-
 <div class="tab-content" id="adm-stats">
 <div class="admin-stats-grid" id="adminDetailedStats"></div>
-<div class="admin-table-container">
-<h3 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:20px;color:var(--brown-dark);">📊 Répartition par formation</h3>
-<div id="formationStats"></div>
-</div>
+<div class="admin-table-container"><h3 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:20px;color:var(--brown-dark);">📊 Répartition par formation</h3><div id="formationStats"></div></div>
 </div>
 </div>
 
-<!-- ===== MODALS ===== -->
-<div class="modal" id="loginModal">
-<div class="modal-content">
-<button class="close-modal" id="closeLogin" type="button" aria-label="Fermer">&times;</button>
-<h2 style="color:var(--brown-main);margin-bottom:20px;font-family:'Playfair Display',serif;font-size:26px;">Connexion</h2>
-<form id="loginForm">
-<div class="form-group"><label for="accessCode">Code d'accès</label><input type="text" id="accessCode" placeholder="Entrez votre code d'accès" required></div>
-<button type="submit" class="btn btn-primary" style="width:100%;" id="loginSubmitBtn">Se connecter</button>
-</form>
-<p style="margin-top:18px;text-align:center;color:#666;font-size:13px;">Vous n'avez pas encore de code? Inscrivez-vous à une formation.</p>
-</div>
-</div>
+<div class="modal" id="loginModal"><div class="modal-content"><button class="close-modal" id="closeLogin" type="button" aria-label="Fermer">&times;</button><h2 style="color:var(--brown-main);margin-bottom:20px;font-family:'Playfair Display',serif;font-size:26px;">Connexion</h2><form id="loginForm"><div class="form-group"><label for="accessCode">Code d'accès</label><input type="text" id="accessCode" placeholder="Entrez votre code d'accès" required></div><button type="submit" class="btn btn-primary" style="width:100%;" id="loginSubmitBtn">Se connecter</button></form><p style="margin-top:18px;text-align:center;color:#666;font-size:13px;">Vous n'avez pas encore de code? Inscrivez-vous à une formation.</p></div></div>
 
-<div class="modal" id="registerModal">
-<div class="modal-content">
-<button class="close-modal" id="closeRegister" type="button" aria-label="Fermer">&times;</button>
-<h2 style="color:var(--brown-main);margin-bottom:20px;font-family:'Playfair Display',serif;font-size:26px;">Inscription</h2>
-<form id="registerForm">
-<div class="form-group"><label for="regNom">Nom</label><input type="text" id="regNom" required></div>
-<div class="form-group"><label for="regPrenom">Prénom</label><input type="text" id="regPrenom" required></div>
-<div class="form-group"><label for="regPhone">Téléphone</label><input type="tel" id="regPhone" required></div>
-<div class="form-group"><label for="regFormation">Formation</label><select id="regFormation" required><option value="">Sélectionnez une formation</option></select></div>
-<div class="form-group">
-<label>Mode de paiement</label>
-<div class="payment-methods">
-<div class="payment-method-option"><input type="radio" id="payNatcash" name="regPayment" value="natcash" required><label for="payNatcash"><span class="method-icon">💳</span><span class="method-name">Natcash</span></label></div>
-<div class="payment-method-option"><input type="radio" id="payMoncash" name="regPayment" value="moncash" required><label for="payMoncash"><span class="method-icon">💰</span><span class="method-name">Moncash</span></label></div>
-</div>
-<div class="payment-info" id="paymentInfoBox">
-<div class="payment-info-title"><span id="paymentInfoIcon"></span><span id="paymentInfoTitle">Envoyez le paiement à:</span></div>
-<div class="payment-info-number" id="paymentInfoNumber">-</div>
-<div class="payment-info-note"> Après avoir effectué le paiement, cliquez sur "S'inscrire". Votre demande sera examinée par l'administration qui vous enverra votre code d'accès.</div>
-</div>
-</div>
-<button type="submit" class="btn btn-primary" style="width:100%;" id="registerSubmitBtn">S'inscrire</button>
-</form>
-</div>
-</div>
+<div class="modal" id="registerModal"><div class="modal-content"><button class="close-modal" id="closeRegister" type="button" aria-label="Fermer">&times;</button><h2 style="color:var(--brown-main);margin-bottom:20px;font-family:'Playfair Display',serif;font-size:26px;">Inscription</h2><form id="registerForm"><div class="form-group"><label for="regNom">Nom</label><input type="text" id="regNom" required></div><div class="form-group"><label for="regPrenom">Prénom</label><input type="text" id="regPrenom" required></div><div class="form-group"><label for="regPhone">Téléphone</label><input type="tel" id="regPhone" required></div><div class="form-group"><label for="regFormation">Formation</label><select id="regFormation" required><option value="">Sélectionnez une formation</option></select></div><div class="form-group"><label>Mode de paiement</label><div class="payment-methods"><div class="payment-method-option"><input type="radio" id="payNatcash" name="regPayment" value="natcash" required><label for="payNatcash"><span class="method-icon">💳</span><span class="method-name">Natcash</span></label></div><div class="payment-method-option"><input type="radio" id="payMoncash" name="regPayment" value="moncash" required><label for="payMoncash"><span class="method-icon">💰</span><span class="method-name">Moncash</span></label></div></div><div class="payment-info" id="paymentInfoBox"><div class="payment-info-title"><span id="paymentInfoIcon"></span><span id="paymentInfoTitle">Envoyez le paiement à:</span></div><div class="payment-info-number" id="paymentInfoNumber">-</div><div class="payment-info-note"> Après avoir effectué le paiement, cliquez sur "S'inscrire". Votre demande sera examinée par l'administration qui vous enverra votre code d'accès.</div></div></div><button type="submit" class="btn btn-primary" style="width:100%;" id="registerSubmitBtn">S'inscrire</button></form></div></div>
 
-<div class="modal" id="successModal">
-<div class="modal-content" style="text-align:center;">
-<button class="close-modal" id="closeSuccess" type="button" aria-label="Fermer">&times;</button>
-<div class="success-icon">✓</div>
-<h2 style="color:var(--brown-main);margin-bottom:12px;font-family:'Playfair Display',serif;font-size:26px;" id="successTitle">Demande envoyée!</h2>
-<p style="color:#666;font-size:14px;margin-bottom:15px;" id="successMessage">Votre demande d'inscription a été envoyée à l'administration.</p>
-<div id="successCodeDisplay" style="display:none;">
-<p style="color:#666;font-size:14px;margin-bottom:12px;">Code d'accès généré:</p>
-<div class="code-display"><div class="code" id="generatedCode"></div></div>
-<p style="color:#666;font-size:13px;margin-bottom:20px;">Conservez ce code précieusement.</p>
-</div>
-<button class="btn btn-primary" id="closeSuccessBtn" type="button">Fermer</button>
-</div>
-</div>
+<div class="modal" id="successModal"><div class="modal-content" style="text-align:center;"><button class="close-modal" id="closeSuccess" type="button" aria-label="Fermer">&times;</button><div class="success-icon">✓</div><h2 style="color:var(--brown-main);margin-bottom:12px;font-family:'Playfair Display',serif;font-size:26px;" id="successTitle">Demande envoyée!</h2><p style="color:#666;font-size:14px;margin-bottom:15px;" id="successMessage">Votre demande d'inscription a été envoyée à l'administration.</p><div id="successCodeDisplay" style="display:none;"><p style="color:#666;font-size:14px;margin-bottom:12px;">Code d'accès généré:</p><div class="code-display"><div class="code" id="generatedCode"></div></div><p style="color:#666;font-size:13px;margin-bottom:20px;">Conservez ce code précieusement.</p></div><button class="btn btn-primary" id="closeSuccessBtn" type="button">Fermer</button></div></div>
 
-<div class="modal" id="approveModal">
-<div class="modal-content">
-<button class="close-modal" id="closeApprove" type="button" aria-label="Fermer">&times;</button>
-<h2 style="color:var(--brown-main);margin-bottom:20px;font-family:'Playfair Display',serif;font-size:24px;">Approuver l'inscription</h2>
-<div id="approveStudentInfo"></div>
-<div class="form-group" style="margin-top:20px;">
-<label for="generatedAccessCode">Code d'accès à générer</label>
-<input type="text" id="generatedAccessCode" placeholder="Code généré automatiquement" readonly>
-</div>
-<div class="form-group">
-<label for="approveMessage">Message pour l'étudiant (WhatsApp)</label>
-<textarea id="approveMessage" rows="4" style="width:100%;padding:12px 15px;border:2px solid var(--cream-dark);border-radius:10px;font-size:14px;font-family:'Poppins',sans-serif;background:var(--cream);"></textarea>
-</div>
-<div style="display:flex;gap:10px;margin-top:20px;">
-<button class="btn btn-success" id="confirmApproveBtn" style="flex:1;">✅ Approuver & Envoyer</button>
-<button class="btn btn-secondary" id="cancelApproveBtn" style="flex:1;">Annuler</button>
-</div>
-</div>
-</div>
+<div class="modal" id="approveModal"><div class="modal-content"><button class="close-modal" id="closeApprove" type="button" aria-label="Fermer">&times;</button><h2 style="color:var(--brown-main);margin-bottom:20px;font-family:'Playfair Display',serif;font-size:24px;">Approuver l'inscription</h2><div id="approveStudentInfo"></div><div class="form-group" style="margin-top:20px;"><label for="generatedAccessCode">Code d'accès à générer</label><input type="text" id="generatedAccessCode" placeholder="Code généré automatiquement" readonly></div><div class="form-group"><label for="approveMessage">Message pour l'étudiant (WhatsApp)</label><textarea id="approveMessage" rows="4" style="width:100%;padding:12px 15px;border:2px solid var(--cream-dark);border-radius:10px;font-size:14px;font-family:'Poppins',sans-serif;background:var(--cream);"></textarea></div><div style="display:flex;gap:10px;margin-top:20px;"><button class="btn btn-success" id="confirmApproveBtn" style="flex:1;">✅ Approuver & Envoyer</button><button class="btn btn-secondary" id="cancelApproveBtn" style="flex:1;">Annuler</button></div></div></div>
 
-<div class="modal" id="alertModal">
-<div class="modal-content" style="text-align:center;max-width:400px;">
-<button class="close-modal" id="closeAlert" type="button" aria-label="Fermer">&times;</button>
-<div style="font-size:50px;margin-bottom:15px;" id="alertIcon">⚠️</div>
-<h3 style="color:var(--brown-main);margin-bottom:10px;font-family:'Playfair Display',serif;" id="alertTitle">Message</h3>
-<p style="color:#666;margin-bottom:20px;" id="alertMessage"></p>
-<button class="btn btn-primary" id="alertOk" type="button">OK</button>
-</div>
-</div>
+<div class="modal" id="alertModal"><div class="modal-content" style="text-align:center;max-width:400px;"><button class="close-modal" id="closeAlert" type="button" aria-label="Fermer">&times;</button><div style="font-size:50px;margin-bottom:15px;" id="alertIcon">️</div><h3 style="color:var(--brown-main);margin-bottom:10px;font-family:'Playfair Display',serif;" id="alertTitle">Message</h3><p style="color:#666;margin-bottom:20px;" id="alertMessage"></p><button class="btn btn-primary" id="alertOk" type="button">OK</button></div></div>
 
 <footer>
 <div class="footer-content">
@@ -767,11 +577,11 @@ var CONFIG = {
 
 var formations = [
     {id:'chimie',name:'Chimie Industrielle',image:'https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=400&fit=crop',badge:'Séminaire',shortDesc:'Apprenez à fabriquer des produits d\'usage courant: savons, parfums, liquides et Mistoline.',description:'Ce séminaire vous permet de découvrir les bases pratiques de la fabrication de plusieurs produits d\'usage courant.',duration:'2 jours',schedule:'Samedi et Dimanche: 9h - 1h',inscription:1000,participation:2500,courses:['Savons lavés','Parfum','Liquide','Mistoline'],detail:{objectives:['Comprendre les principes de base de la fabrication de produits chimiques.','Maîtriser les techniques de fabrication des savons lavés.','Apprendre à concevoir des parfums personnalisés.','Fabriquer des produits liquides de qualité.','Réaliser de la Mistoline selon les standards professionnels.','Développer une activité génératrice de revenus.'],modules:[{title:'Module 1 — Savons Lavés',content:'Apprentissage des techniques de fabrication des savons lavés: matières premières, dosages, saponification, moulage et finition.'},{title:'Module 2 — Parfum',content:'Initiation à la conception de parfums: notes olfactives, techniques d\'assemblage et création de fragrances personnalisées.'},{title:'Module 3 — Liquide',content:'Fabrication de produits liquides d\'usage courant: formules de base, dosages et techniques de production.'},{title:'Module 4 — Mistoline',content:'Réalisation de la Mistoline: ingrédients, processus de fabrication et techniques de conditionnement.'}],skills:['Maîtriser les formules de base des produits chimiques','Connaître les matières premières et leurs propriétés','Respecter les dosages et les proportions','Assurer la qualité et la sécurité des produits','Conditionner et présenter les produits finis']}},
-    {id:'decoration',name:'Décoration Événementielle',image:'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop',badge:'2 Mois',shortDesc:'Maîtrisez les techniques de décoration pour mariages, anniversaires et cérémonies.',description:'La formation en décoration événementielle permet à l\'apprenant de découvrir les principes de conception, d\'organisation et de réalisation d\'une décoration pour différents événements.',duration:'2 mois',schedule:'10h - 3h',inscription:1000,participation:9500,courses:['Décoration mariage','Décoration anniversaire','Décoration cérémonie','Création d\'ambiances'],includes:'Maillot inclus',detail:{objectives:['Comprendre les bases de la décoration et de l\'aménagement d\'un espace.','Choisir et harmoniser les couleurs, matières et éléments décoratifs.','Préparer un thème et un concept décoratif.','Réaliser des décors simples pour différents types d\'événements.','Utiliser correctement les ballons, tissus, fleurs et accessoires décoratifs.','Développer une méthode de travail professionnelle.','Apprendre les bases de l\'organisation, du budget et de la commercialisation.'],weeks:[{num:1,content:'Introduction à la décoration événementielle, styles, thèmes, couleurs, outils et règles de sécurité.'},{num:2,content:'Harmonie des couleurs, choix des matières, conception d\'un thème et préparation d\'un espace.'},{num:3,content:'Décoration avec ballons: arches, colonnes, bouquets et compositions.'},{num:4,content:'Utilisation des tissus, nappes, rideaux, fonds décoratifs et éléments de présentation.'},{num:5,content:'Décoration de tables, espaces photo, tables principales et petits événements.'},{num:6,content:'Composition avec fleurs et accessoires, personnalisation et création d\'ambiances.'},{num:7,content:'Conception d\'un décor complet: préparation, montage, organisation et finitions.'},{num:8,content:'Projet final: réalisation et présentation d\'une décoration événementielle complète.'}],skills:['Concevoir et réaliser une décoration adaptée à un événement','Harmoniser les couleurs et les matières','Travailler avec ballons, tissus et fleurs','Présenter un service de manière professionnelle','Gérer un budget et commercialiser ses services']}},
-    {id:'sandalerie',name:'Sandalerie Artisanale',image:'https://images.unsplash.com/photo-1603487742131-4160ec999306?w=600&h=400&fit=crop',badge:'2 Mois',shortDesc:'Fabriquez des sandales artisanales pour hommes et femmes avec créativité.',description:'Cette formation de deux mois est destinée aux personnes souhaitant apprendre les techniques de fabrication de sandales artisanales, depuis la conception du modèle jusqu\'aux finitions.',duration:'2 mois',schedule:'3h - 5h',inscription:1000,participation:9000,courses:['Conception de modèles','Choix des matériaux','Techniques de fabrication','Finitions'],includes:'Maillot inclus',detail:{objectives:['Identifier et utiliser correctement les matières, outils et accessoires nécessaires.','Prendre les mesures et préparer une semelle adaptée.','Découper, assembler, coller et fixer les différentes parties d\'une sandale.','Réaliser plusieurs modèles de sandales artisanales.','Maîtriser les techniques de finition et de contrôle de qualité.','Développer une capacité de production permettant de créer une petite activité génératrice de revenus.'],weeks:[{num:1,content:'Présentation de la sandalerie, sécurité, outils, matières, prise de mesures et découverte des différents modèles.'},{num:2,content:'Préparation des semelles: traçage, découpe, ajustement et préparation des supports.'},{num:3,content:'Conception des brides et bandes: mesures, traçage, découpe et préparation.'},{num:4,content:'Assemblage d\'un premier modèle: collage, fixation, positionnement et ajustements.'},{num:5,content:'Réalisation de modèles avec boucles, brides et différentes formes de décoration.'},{num:6,content:'Techniques de finition: ponçage, nettoyage, correction des défauts et contrôle de qualité.'},{num:7,content:'Création de modèles personnalisés, combinaison des matières et amélioration du design.'},{num:8,content:'Projet final: réalisation complète d\'une ou plusieurs paires, présentation, évaluation et conseils pour la commercialisation.'}],skills:['Concevoir et fabriquer une paire de sandales artisanales','Réaliser des finitions soignées','Reproduire plusieurs modèles','Préparer une petite production destinée à la vente','Maîtriser les techniques d\'assemblage et de collage'],material:'Semelles, cuir ou similicuir, bandes/brides, boucles et accessoires décoratifs, colle adaptée, fil et aiguilles selon le modèle, cutter/ciseaux, règle, crayon ou marqueur, marteau, pince, papier abrasif/outil de finition et matériel de protection.'}},
-    {id:'impression',name:'Impression Moderne',image:'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=600&h=400&fit=crop',badge:'Séminaire',shortDesc:'Techniques d\'impression sur tableau PVC, tableau lumineux et bidons personnalisés.',description:'Ce séminaire pratique permet aux participants de découvrir et de pratiquer trois techniques de personnalisation et de création.',duration:'2 jours',schedule:'Samedi et Dimanche: 9h - 1h',inscription:500,participation:4000,courses:['Tableau PVC','Tableau lumineux','Bidon personnalisé'],detail:{objectives:['Comprendre les principes de base de l\'impression et de la personnalisation.','Découvrir les matériaux et outils nécessaires pour chaque produit.','Apprendre les étapes essentielles de préparation, création et finition.','Réaliser des produits propres, esthétiques et présentables.','Développer sa créativité dans le choix des images, textes et designs.','Comprendre les bases de la présentation et de la commercialisation.'],modules:[{title:'Module I — Tableau PVC',content:'Préparation du design, choix du format, préparation du support, transfert/application du visuel, découpe et finition, contrôle de qualité.'},{title:'Module II — Tableau lumineux',content:'Conception du visuel, préparation du support, positionnement du visuel, installation et vérification de l\'éclairage, assemblage et finitions.'},{title:'Module III — Bidon personnalisé',content:'Nettoyage et préparation du bidon, création ou adaptation du design, application de la personnalisation, finition et contrôle de qualité.'}],skills:['Créer des tableaux PVC personnalisés','Réaliser des tableaux lumineux attractifs','Personnaliser des bidons de manière professionnelle','Préparer des designs graphiques','Commercialiser les produits réalisés']}},
-    {id:'bouquet',name:'Bouquet Fleurs & Chambre Romantique',image:'https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=600&h=400&fit=crop',badge:'Séminaire',shortDesc:'Créez des bouquets uniques (fleurs éternelles, d\'argent, cake money) et des ambiances romantiques.',description:'Ce support pratique permet à l\'apprenant de comprendre les matériaux, les techniques de composition, l\'assemblage, l\'emballage et la présentation commerciale des bouquets et décorations.',duration:'2 jours',schedule:'Samedi et Dimanche: 9h - 1h',inscription:1000,participation:5000,courses:['Fleurs éternelles','Fleurs d\'argent','Emballage bouteille','Cake money','Décoration chambre'],detail:{objectives:['Comprendre les bases de la confection de bouquets décoratifs.','Maîtriser les techniques de composition et d\'assemblage.','Réaliser des fleurs éternelles, fleurs d\'argent, emballages bouteille et cake money.','Créer une ambiance romantique élégante et chaleureuse.','Adapter les décors aux occasions spéciales.','Créer une activité génératrice de revenus.'],chapters:[{num:1,title:'Notions et historique',content:'Les bouquets existent depuis des siècles comme moyen d\'offrir, de décorer et de transmettre un message.'},{num:2,title:'Matériel et fournitures',content:'Fleurs éternelles ou artificielles, papier d\'emballage, rubans, fil floral, tiges, mousse, supports et accessoires.'},{num:3,title:'Fleurs éternelles',content:'Choisir les fleurs, préparer les tiges, déterminer les couleurs, créer une composition équilibrée et réaliser un emballage propre.'},{num:4,title:'Fleurs d\'argent',content:'Intégrer des billets ou éléments monétaires dans une composition florale de manière esthétique et sécurisée.'},{num:5,title:'Emballage bouteille',content:'Transformer une bouteille en cadeau décoratif en l\'intégrant dans une composition avec fleurs, papier et rubans.'},{num:6,title:'Cake money',content:'Création décorative inspirée de la présentation d\'un gâteau, dans laquelle l\'argent et les éléments décoratifs sont organisés en composition.'},{num:7,title:'Décoration chambre romantique',content:'Techniques de décoration avec ballons, fleurs, lumières, tissus et accessoires pour créer une ambiance romantique.'},{num:8,title:'Projet pratique final',content:'Réalisation d\'une création complète au choix.'}],skills:['Créer des bouquets harmonieux et équilibrés','Maîtriser les techniques de fleurs éternelles et d\'argent','Réaliser des emballages bouteille créatifs','Concevoir des cake money originaux','Créer des ambiances romantiques complètes','Commercialiser ses créations']}},
-    {id:'perruque',name:'Confection de Perruques',image:'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&h=400&fit=crop',badge:'1 Mois',shortDesc:'Techniques professionnelles: Closure, Greffe, Perruque frange et Perruque 14×4.',description:'À travers ces techniques, l\'étudiant(e) développe les bases nécessaires pour confectionner, personnaliser et finir des perruques de manière professionnelle.',duration:'1 mois',schedule:'Samedi et Dimanche: 9h - 1h',inscription:1000,participation:5000,courses:['Closure','Greffe','Perruque frange','Perruque 14×4'],includes:'Aiguilles gratuites',detail:{objectives:['Développer les bases nécessaires pour confectionner des perruques professionnellement.','Maîtriser les techniques de closure, greffe, perruque frange et 14×4.','Personnaliser et finir des perruques avec soin.','Acquérir une autonomie dans la réalisation complète de perruques.'],modules:[{title:'Technique 1 — Closure',content:'La closure est une pièce de dentelle qui permet de créer une finition naturelle. Préparer et positionner la closure, réaliser la couture et la fixation sur le bonnet, obtenir une finition propre et naturelle.'},{title:'Technique 2 — Greffe',content:'La greffe consiste à implanter ou fixer les mèches afin de construire une chevelure régulière et naturelle. Préparer le support, choisir l\'ordre et la direction des mèches, contrôler la densité.'},{title:'Technique 3 — Perruque frange',content:'La perruque frange est conçue avec une frange qui encadre le visage et donne un style moderne. Préparer la base, déterminer la longueur et la forme de la frange, réaliser la coupe et la mise en forme.'},{title:'Technique 4 — Perruque 14×4',content:'La perruque 14×4 utilise une zone de dentelle plus large à l\'avant pour offrir davantage de possibilités de coiffage. Préparer et positionner la dentelle, effectuer la couture, personnaliser la ligne de cheveux.'}],skills:['Confectionner des closures avec finition naturelle','Réaliser des greffes régulières et professionnelles','Créer des perruques frange modernes','Maîtriser la technique 14×4','Personnaliser et finir les perruques avec soin'],material:'Tête de mannequin, bonnet, aiguilles et fil, ciseaux, peigne/brosse, mèches ou cheveux, dentelle selon la technique et produits de finition.'}}
+    {id:'decoration',name:'Décoration Événementielle',image:'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop',badge:'2 Mois',shortDesc:'Maîtrisez les techniques de décoration pour mariages, anniversaires et cérémonies.',description:'La formation en décoration événementielle permet à l\'apprenant de découvrir les principes de conception, d\'organisation et de réalisation d\'une décoration pour différents événements.',duration:'2 mois',schedule:'10h - 3h',inscription:1000,participation:9500,courses:['Décoration mariage','Décoration anniversaire','Décoration cérémonie','Création d\'ambiances'],includes:'Maillot inclus',detail:{objectives:['Comprendre les bases de la décoration et de l\'aménagement d\'un espace.','Choisir et harmoniser les couleurs, matières et éléments décoratifs.','Préparer un thème et un concept décoratif.','Réaliser des décors simples pour différents types d\'événements.','Utiliser correctement les ballons, tissus, fleurs et accessoires décoratifs.','Développer une méthode de travail professionnelle.','Apprendre les bases de l\'organisation, du budget et de la commercialisation.'],weeks:[{num:1,content:'Introduction à la décoration événementielle, styles, thèmes, couleurs, outils et règles de sécurité.'},{num:2,content:'Harmonie des couleurs, choix des matières, conception d\'un thème et préparation d\'un espace.'},{num:3,content:'Décoration avec ballons: arches, colonnes, bouquets et compositions.'},{num:4,content:'Utilisation des tissus, nappes, rideaux, fonds décoratifs et éléments de présentation.'},{num:5,content:'Décoration de tables, espaces photo, tables principales et petits événements.'},{num:6,content:'Composition avec fleurs et accessoires, personnalisation et création d\'ambiances.'},{num:7,content:'Conception d\'un décor complet: préparation, montage, organisation et finitions.'},{num:8,content:'Projet final: réalisation et présentation d\'une décoration événementielle complète.'}],skills:['Concevoir et réaliser une décoration adaptée à un événement','Harmoniser les couleurs et les matières','Travailler avec ballons, tissus et fleurs','Présenter un service de manière professionnelle','Gérer un budget et commercialiser ses services'],material:'Ballons, pompe, rubans, tissus, nappes, rideaux, supports et structures décoratives, fleurs et feuillages, adhésifs et attaches, ciseaux, fil, accessoires de table, éléments de fond et matériel de protection.'}},
+    {id:'sandalerie',name:'Sandalerie Artisanale',image:'https://images.unsplash.com/photo-1603487742131-4160ec999306?w=600&h=400&fit=crop',badge:'2 Mois',shortDesc:'Fabriquez des sandales artisanales pour hommes et femmes avec créativité.',description:'Cette formation de deux mois est destinée aux personnes souhaitant apprendre les techniques de fabrication de sandales artisanales, depuis la conception du modèle jusqu\'aux finitions.',duration:'2 mois',schedule:'3h - 5h',inscription:1000,participation:9000,courses:['Conception de modèles','Choix des matériaux','Techniques de fabrication','Finitions'],includes:'Maillot inclus',detail:{objectives:['Identifier et utiliser correctement les matières, outils et accessoires nécessaires.','Prendre les mesures et préparer une semelle adaptée.','Découper, assembler, coller et fixer les différentes parties d\'une sandale.','Réaliser plusieurs modèles de sandales artisanales.','Maîtriser les techniques de finition et de contrôle de qualité.','Développer une capacité de production permettant de créer une petite activité génératrice de revenus.'],weeks:[{num:1,content:'Présentation de la sandalerie, sécurité, outils, matières, prise de mesures et découverte des différents modèles.'},{num:2,content:'Préparation des semelles: traçage, découpe, ajustement et préparation des supports.'},{num:3,content:'Conception des brides et bandes: mesures, traçage, découpe et préparation.'},{num:4,content:'Assemblage d\'un premier modèle: collage, fixation, positionnement et ajustements.'},{num:5,content:'Réalisation de modèles avec boucles, brides et différentes formes de décoration.'},{num:6,content:'Techniques de finition: ponçage, nettoyage, correction des défauts et contrôle de qualité.'},{num:7,content:'Création de modèles personnalisés, combinaison des matières et amélioration du design.'},{num:8,content:'Projet final: réalisation complète d\'une ou plusieurs paires, présentation, évaluation et conseils pour la commercialisation.'}],skills:['Concevoir et fabriquer une paire de sandales artisanales','Réaliser des finitions soignées','Reproduire plusieurs modèles','Préparer une petite production destinée à la vente','Maîtriser les techniques d\'assemblage et de collage'],material:'Semelles, cuir ou similicuir, bandes/brides, boucles et accessoires décoratifs, colle adaptée, fil et aiguilles selon le modèle, cutter/ciseaux, règle, crayon ou marqueur, marteau, pince, papier abrasif/outil de finition et matériel de protection.',method:'La formation repose principalement sur des démonstrations du formateur, des exercices pratiques progressifs, la réalisation de modèles individuels et un projet final. L\'accent est mis sur la précision, la propreté du travail, la solidité des assemblages et la créativité.',evaluation:'L\'évaluation porte sur l\'assiduité, la maîtrise des techniques, la qualité des réalisations, la finition et la capacité à réaliser un modèle de manière autonome. À la fin des deux mois, une évaluation pratique finale permet de vérifier les compétences acquises.'}},
+    {id:'impression',name:'Impression Moderne',image:'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=600&h=400&fit=crop',badge:'Séminaire',shortDesc:'Techniques d\'impression sur tableau PVC, tableau lumineux et bidons personnalisés.',description:'Ce séminaire pratique permet aux participants de découvrir et de pratiquer trois techniques de personnalisation et de création.',duration:'2 jours',schedule:'Samedi et Dimanche: 9h - 1h',inscription:500,participation:4000,courses:['Tableau PVC','Tableau lumineux','Bidon personnalisé'],detail:{objectives:['Comprendre les principes de base de l\'impression et de la personnalisation.','Découvrir les matériaux et outils nécessaires pour chaque produit.','Apprendre les étapes essentielles de préparation, création et finition.','Réaliser des produits propres, esthétiques et présentables.','Développer sa créativité dans le choix des images, textes et designs.','Comprendre les bases de la présentation et de la commercialisation.'],modules:[{title:'Module I — Tableau PVC',content:'Préparation du design, choix du format, préparation du support, transfert/application du visuel, découpe et finition, contrôle de qualité.'},{title:'Module II — Tableau lumineux',content:'Conception du visuel, préparation du support, positionnement du visuel, installation et vérification de l\'éclairage, assemblage et finitions.'},{title:'Module III — Bidon personnalisé',content:'Nettoyage et préparation du bidon, création ou adaptation du design, application de la personnalisation, finition et contrôle de qualité.'}],skills:['Créer des tableaux PVC personnalisés','Réaliser des tableaux lumineux attractifs','Personnaliser des bidons de manière professionnelle','Préparer des designs graphiques','Commercialiser les produits réalisés'],material:'Supports PVC, supports pour tableaux lumineux, bidons adaptés, matériaux de personnalisation, outils de découpe et de finition, matériel d\'impression/transfert selon la technique utilisée, éléments d\'éclairage pour les tableaux lumineux, ordinateur ou téléphone pour préparer les designs, ainsi que les équipements de protection nécessaires.'}},
+    {id:'bouquet',name:'Bouquet Fleurs & Chambre Romantique',image:'https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=600&h=400&fit=crop',badge:'Séminaire',shortDesc:'Créez des bouquets uniques (fleurs éternelles, d\'argent, cake money) et des ambiances romantiques.',description:'Ce support pratique permet à l\'apprenant de comprendre les matériaux, les techniques de composition, l\'assemblage, l\'emballage et la présentation commerciale des bouquets et décorations.',duration:'2 jours',schedule:'Samedi et Dimanche: 9h - 1h',inscription:1000,participation:5000,courses:['Fleurs éternelles','Fleurs d\'argent','Emballage bouteille','Cake money','Décoration chambre'],detail:{objectives:['Comprendre les bases de la confection de bouquets décoratifs.','Maîtriser les techniques de composition et d\'assemblage.','Réaliser des fleurs éternelles, fleurs d\'argent, emballages bouteille et cake money.','Créer une ambiance romantique élégante et chaleureuse.','Adapter les décors aux occasions spéciales.','Créer une activité génératrice de revenus.'],chapters:[{num:1,title:'Notions et historique',content:'Les bouquets existent depuis des siècles comme moyen d\'offrir, de décorer et de transmettre un message. Les artisans ont progressivement développé des compositions plus créatives en utilisant fleurs naturelles, fleurs séchées, fleurs artificielles et différents matériaux décoratifs.'},{num:2,title:'Matériel et fournitures',content:'Fleurs éternelles ou artificielles selon le modèle. Papier d\'emballage, papier décoratif et rubans. Fil floral, tiges, attaches et matériel de fixation. Mousse, support ou base selon la composition. Accessoires décoratifs et éléments personnalisés. Matériel de découpe: ciseaux, cutter et pinces.'},{num:3,title:'Fleurs éternelles',content:'Apprendre à choisir les fleurs, préparer les tiges, déterminer les couleurs, créer une composition équilibrée, fixer les éléments et réaliser un emballage propre. L\'accent est mis sur l\'harmonie, la symétrie et la présentation.'},{num:4,title:'Fleurs d\'argent',content:'Cette technique consiste à intégrer des billets ou éléments monétaires dans une composition florale de manière esthétique et sécurisée. Le participant apprend à organiser la composition, protéger les éléments et obtenir un bouquet élégant et présentable.'},{num:5,title:'Emballage bouteille',content:'Le module montre comment transformer une bouteille en cadeau décoratif en l\'intégrant dans une composition avec fleurs, papier, rubans et accessoires. Le travail porte sur la préparation, la fixation, l\'équilibre et la finition.'},{num:6,title:'Cake money',content:'Le cake money est une création décorative inspirée de la présentation d\'un gâteau, dans laquelle l\'argent et les éléments décoratifs sont organisés en composition. L\'apprenant étudie la structure, la disposition, la décoration et la présentation finale.'},{num:7,title:'Techniques de composition',content:'Choisir une palette de couleurs cohérente. Créer un point central et une bonne répartition des éléments. Varier les hauteurs, textures et volumes. Fixer les éléments sans abîmer la composition. Réaliser des finitions propres et professionnelles.'},{num:8,title:'Emballage et présentation',content:'L\'emballage doit protéger la création tout en la mettant en valeur. Le choix du papier, du ruban, des couleurs et de la forme finale doit être cohérent avec le style du bouquet et l\'occasion.'},{num:9,title:'Création d\'une activité',content:'La confection de bouquets peut devenir une activité génératrice de revenus. Il est important de calculer le coût des matériaux, le temps de travail, les frais de transport et la marge avant de fixer un prix.'},{num:10,title:'Projet pratique final',content:'Chaque apprenant réalise une création complète au choix: bouquet de fleurs éternelles, bouquet de fleurs d\'argent, emballage bouteille ou cake money. Le projet est évalué sur la créativité, la solidité, la propreté, l\'harmonie des couleurs et la présentation.'}],skills:['Créer des bouquets harmonieux et équilibrés','Maîtriser les techniques de fleurs éternelles et d\'argent','Réaliser des emballages bouteille créatifs','Concevoir des cake money originaux','Créer des ambiances romantiques complètes','Commercialiser ses créations']}},
+    {id:'perruque',name:'Confection de Perruques',image:'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&h=400&fit=crop',badge:'1 Mois',shortDesc:'Techniques professionnelles: Closure, Greffe, Perruque frange et Perruque 14×4.',description:'À travers ces techniques, l\'étudiant(e) développe les bases nécessaires pour confectionner, personnaliser et finir des perruques de manière professionnelle.',duration:'1 mois',schedule:'Samedi et Dimanche: 9h - 1h',inscription:1000,participation:5000,courses:['Closure','Greffe','Perruque frange','Perruque 14×4'],includes:'Aiguilles gratuites',detail:{objectives:['Développer les bases nécessaires pour confectionner des perruques professionnellement.','Maîtriser les techniques de closure, greffe, perruque frange et 14×4.','Personnaliser et finir des perruques avec soin.','Acquérir une autonomie dans la réalisation complète de perruques.'],modules:[{title:'Technique 1 — Closure',content:'La closure est une pièce de dentelle qui permet de créer une finition naturelle sur le dessus de la perruque. Points à maîtriser: Préparer et positionner correctement la closure. Réaliser la couture et la fixation sur le bonnet. Obtenir une finition propre et naturelle. Personnaliser la ligne et la coiffure.'},{title:'Technique 2 — Greffe',content:'La greffe consiste à implanter ou fixer les mèches afin de construire une chevelure régulière et naturelle. Points à maîtriser: Préparer le support de travail. Choisir l\'ordre et la direction des mèches. Fixer les mèches proprement et régulièrement. Contrôler la densité et la finition.'},{title:'Technique 3 — Perruque frange',content:'La perruque frange est conçue avec une frange qui encadre le visage et donne un style moderne. Points à maîtriser: Préparer la base de la perruque. Déterminer la longueur et la forme de la frange. Réaliser la coupe et la mise en forme. Assurer l\'entretien et la finition.'},{title:'Technique 4 — Perruque 14×4',content:'La perruque 14×4 utilise une zone de dentelle plus large à l\'avant pour offrir davantage de possibilités de coiffage. Points à maîtriser: Préparer et positionner la dentelle 14×4. Effectuer la couture et la fixation. Personnaliser la ligne de cheveux. Réaliser le coiffage et la finition naturelle.'}],skills:['Confectionner des closures avec finition naturelle','Réaliser des greffes régulières et professionnelles','Créer des perruques frange modernes','Maîtriser la technique 14×4','Personnaliser et finir les perruques avec soin'],material:'Tête de mannequin, bonnet, aiguilles et fil, ciseaux, peigne/brosse, mèches ou cheveux, dentelle selon la technique et produits de finition.'}}
 ];
 
 var students = {};
@@ -779,26 +589,38 @@ var currentStudent = null;
 var currentApproveCode = null;
 
 function $(id) { return document.getElementById(id); }
+
 function showLoading(text) {
     var overlay = $('loadingOverlay');
-    if (overlay) { overlay.querySelector('.loading-text').textContent = text || 'Chargement...'; overlay.style.display = 'flex'; overlay.classList.remove('hidden'); }
+    if (overlay) {
+        overlay.querySelector('.loading-text').textContent = text || 'Chargement...';
+        overlay.style.display = 'flex';
+        overlay.classList.remove('hidden');
+    }
 }
+
 function hideLoading() {
     var overlay = $('loadingOverlay');
-    if (overlay) { overlay.classList.add('hidden'); setTimeout(function() { overlay.style.display = 'none'; }, 500); }
+    if (overlay) {
+        overlay.classList.add('hidden');
+    }
 }
+
 function showAlert(title, message, icon) {
     $('alertTitle').textContent = title;
     $('alertMessage').textContent = message;
-    $('alertIcon').textContent = icon || '⚠️';
+    $('alertIcon').textContent = icon || '️';
     $('alertModal').classList.add('active');
 }
+
 function closeAlertModal() { $('alertModal').classList.remove('active'); }
+
 function escapeHtml(str) {
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(str || ''));
     return div.innerHTML;
 }
+
 function updateDbStatus(online) {
     var statusEl = $('dbStatus');
     var dotEl = $('dbDot');
@@ -809,6 +631,7 @@ function updateDbStatus(online) {
         else { dotEl.classList.add('offline'); textEl.textContent = 'Mode hors-ligne'; }
     }
 }
+
 function initSupabase() {
     try {
         if (typeof window.supabase !== 'undefined') {
@@ -822,31 +645,37 @@ function initSupabase() {
     updateDbStatus(false);
     return false;
 }
+
 async function dbGetStudents() {
     if (!isSupabaseReady || !supabase) return null;
     try { var response = await supabase.from('students').select('*').order('created_at', { ascending: false }); if (response.error) { console.warn('Erreur lecture:', response.error.message); return null; } return response.data || []; }
     catch (e) { console.error('Erreur:', e); return null; }
 }
+
 async function dbInsertStudent(studentData) {
     if (!isSupabaseReady || !supabase) return null;
     try { var response = await supabase.from('students').insert([studentData]).select(); if (response.error) { console.warn('Erreur insertion:', response.error.message); return null; } return response.data ? response.data[0] : null; }
     catch (e) { console.error('Erreur:', e); return null; }
 }
+
 async function dbUpdateStudent(code, updates) {
     if (!isSupabaseReady || !supabase) return null;
     try { var response = await supabase.from('students').update(updates).eq('code', code).select(); if (response.error) { console.warn('Erreur update:', response.error.message); return null; } return response.data ? response.data[0] : null; }
     catch (e) { console.error('Erreur:', e); return null; }
 }
+
 async function dbDeleteStudent(code) {
     if (!isSupabaseReady || !supabase) return null;
     try { var response = await supabase.from('students').delete().eq('code', code); if (response.error) { console.warn('Erreur suppression:', response.error.message); return false; } return true; }
     catch (e) { console.error('Erreur:', e); return false; }
 }
+
 async function dbGetStudentByCode(code) {
     if (!isSupabaseReady || !supabase) return null;
     try { var response = await supabase.from('students').select('*').eq('code', code).single(); if (response.error) { console.warn('Erreur:', response.error.message); return null; } return response.data; }
     catch (e) { console.error('Erreur:', e); return null; }
 }
+
 async function syncStudentsToSupabase() {
     if (!isSupabaseReady) return;
     try {
@@ -909,6 +738,8 @@ function showFormationDetail(formationId) {
         contentHTML += '</div>';
     }
     if (f.detail.material) { contentHTML += '<div class="detail-section"><h2>🧰 Matériel de base</h2><p>' + escapeHtml(f.detail.material) + '</p></div>'; }
+    if (f.detail.method) { contentHTML += '<div class="detail-section"><h2>📖 Méthode d\'apprentissage</h2><p>' + escapeHtml(f.detail.method) + '</p></div>'; }
+    if (f.detail.evaluation) { contentHTML += '<div class="detail-section"><h2>📝 Évaluation et validation</h2><p>' + escapeHtml(f.detail.evaluation) + '</p></div>'; }
     contentHTML += '<div class="detail-section"><h2>🏆 Compétences acquises</h2><ul>';
     for (var s = 0; s < f.detail.skills.length; s++) { contentHTML += '<li>' + escapeHtml(f.detail.skills[s]) + '</li>'; }
     contentHTML += '</ul></div>';
@@ -974,7 +805,7 @@ async function handleRegister(e) {
     var paymentRadios = document.querySelectorAll('input[name="regPayment"]');
     var payment = ''; var paymentNumber = '';
     for (var i = 0; i < paymentRadios.length; i++) { if (paymentRadios[i].checked) { payment = paymentRadios[i].value; break; } }
-    if (!payment) { showAlert('Erreur', 'Veuillez sélectionner un mode de paiement.', '️'); submitBtn.disabled = false; submitBtn.textContent = 'S\'inscrire'; return; }
+    if (!payment) { showAlert('Erreur', 'Veuillez sélectionner un mode de paiement.', '⚠️'); submitBtn.disabled = false; submitBtn.textContent = 'S\'inscrire'; return; }
     if (payment === 'natcash') { paymentNumber = CONFIG.NATCASH_NUMBER; } else if (payment === 'moncash') { paymentNumber = CONFIG.MONCASH_NUMBER; }
     var tempCode = 'TEMP' + Date.now().toString().slice(-8);
     var formation = null;
@@ -984,7 +815,7 @@ async function handleRegister(e) {
     var dbResult = await dbInsertStudent(studentData);
     if (dbResult) { console.log('✅ Inscription pending sauvegardée:', tempCode); } else { console.warn('⚠️ Mode offline'); }
     var paymentLabel = payment === 'natcash' ? 'Natcash' : 'Moncash';
-    var message = '🎓 *NOUVELLE DEMANDE D\'INSCRIPTION - NOVA INSTITUTE*\n\n👤 *Nom:* ' + nom + '\n👤 *Prénom:* ' + prenom + '\n *Téléphone:* ' + phone + '\n📚 *Formation:* ' + formation.name + '\n⏱️ *Durée:* ' + formation.duration + '\n💰 *Inscription:* ' + formation.inscription + ' G\n💰 *Participation:* ' + formation.participation + ' G\n💰 *Montant total:* ' + (formation.inscription + formation.participation) + ' Goudes\n\n💳 *Mode de paiement:* ' + paymentLabel + '\n📱 *Numéro de paiement:* ' + paymentNumber + '\n\n📅 *Date:* ' + new Date().toLocaleDateString('fr-FR') + '\n⏰ *Heure:* ' + new Date().toLocaleTimeString('fr-FR') + '\n\n⚠️ *Action requise:* Veuillez approuver cette inscription et envoyer le code d\'accès à l\'étudiant.';
+    var message = '🎓 *NOUVELLE DEMANDE D\'INSCRIPTION - NOVA INSTITUTE*\n\n👤 *Nom:* ' + nom + '\n👤 *Prénom:* ' + prenom + '\n📞 *Téléphone:* ' + phone + '\n📚 *Formation:* ' + formation.name + '\n️ *Durée:* ' + formation.duration + '\n💰 *Inscription:* ' + formation.inscription + ' G\n💰 *Participation:* ' + formation.participation + ' G\n💰 *Montant total:* ' + (formation.inscription + formation.participation) + ' Goudes\n\n💳 *Mode de paiement:* ' + paymentLabel + '\n *Numéro de paiement:* ' + paymentNumber + '\n\n📅 *Date:* ' + new Date().toLocaleDateString('fr-FR') + '\n⏰ *Heure:* ' + new Date().toLocaleTimeString('fr-FR') + '\n\n⚠️ *Action requise:* Veuillez approuver cette inscription et envoyer le code d\'accès à l\'étudiant.';
     var whatsappURL = 'https://wa.me/' + CONFIG.WHATSAPP_ADMIN + '?text=' + encodeURIComponent(message);
     closeRegister();
     $('successTitle').textContent = 'Demande envoyée!';
@@ -1026,7 +857,7 @@ async function handleLogin(e) {
             var response = await supabase.from('students').select('*').eq('code', code).single();
             if (response.data) {
                 var dbStudent = response.data;
-                if (dbStudent.status === 'pending') { showAlert('En attente', 'Votre inscription est en cours d\'examen par l\'administration.', ''); submitBtn.disabled = false; submitBtn.textContent = 'Se connecter'; return; }
+                if (dbStudent.status === 'pending') { showAlert('En attente', 'Votre inscription est en cours d\'examen par l\'administration.', '⏳'); submitBtn.disabled = false; submitBtn.textContent = 'Se connecter'; return; }
                 if (dbStudent.status === 'rejected') { showAlert('Refusé', 'Votre inscription a été refusée.', '❌'); submitBtn.disabled = false; submitBtn.textContent = 'Se connecter'; return; }
                 console.log('✅ Étudiant Supabase trouvé!');
                 currentStudent = { nom: dbStudent.nom, prenom: dbStudent.prenom || '', phone: dbStudent.phone || '', formation: dbStudent.formation, formationId: dbStudent.formation_id, date: dbStudent.date, schedule: dbStudent.schedule, duration: dbStudent.duration, totalAmount: dbStudent.total_amount, paidAmount: dbStudent.paid_amount, progress: dbStudent.progress, completedCourses: dbStudent.completed_courses, totalCourses: dbStudent.total_courses, present: dbStudent.present, absent: dbStudent.absent, late: dbStudent.late, status: dbStudent.status || 'approved', paymentMethod: dbStudent.payment_method };
@@ -1077,7 +908,7 @@ function showStudentDashboard() {
     $('paidAmount').textContent = currentStudent.paidAmount + ' G';
     $('remainingAmount').textContent = (currentStudent.totalAmount - currentStudent.paidAmount) + ' G';
     $('paymentMethod').textContent = currentStudent.paymentMethod ? (currentStudent.paymentMethod === 'natcash' ? 'Natcash' : 'Moncash') : '-';
-    $('studentStatus').textContent = currentStudent.status === 'approved' ? '✅ Approuvé' : '⏳ En attente';
+    $('studentStatus').textContent = currentStudent.status === 'approved' ? '✅ Approuvé' : ' En attente';
     var f = null;
     for (var j = 0; j < formations.length; j++) { if (formations[j].id === currentStudent.formationId) { f = formations[j]; break; } }
     if (f) {
@@ -1096,6 +927,8 @@ function showStudentDashboard() {
         else if (f.detail.modules) { docHTML += '<div class="student-doc"><h4>📚 Modules de formation</h4>'; for (var m = 0; m < f.detail.modules.length; m++) { docHTML += '<p><strong>' + escapeHtml(f.detail.modules[m].title) + ':</strong> ' + escapeHtml(f.detail.modules[m].content) + '</p>'; } docHTML += '</div>'; }
         if (f.detail.skills) { docHTML += '<div class="student-doc"><h4>🏆 Compétences acquises</h4><ul style="list-style:none;padding:0;">'; for (var s = 0; s < f.detail.skills.length; s++) { docHTML += '<li style="padding:6px 0 6px 25px;position:relative;color:#555;"><span style="position:absolute;left:0;color:var(--gold);">✓</span>' + escapeHtml(f.detail.skills[s]) + '</li>'; } docHTML += '</ul></div>'; }
         if (f.detail.material) { docHTML += '<div class="student-doc"><h4>🧰 Matériel de base</h4><p>' + escapeHtml(f.detail.material) + '</p></div>'; }
+        if (f.detail.method) { docHTML += '<div class="student-doc"><h4>📖 Méthode d\'apprentissage</h4><p>' + escapeHtml(f.detail.method) + '</p></div>'; }
+        if (f.detail.evaluation) { docHTML += '<div class="student-doc"><h4>📝 Évaluation et validation</h4><p>' + escapeHtml(f.detail.evaluation) + '</p></div>'; }
         $('studentDocuments').innerHTML = docHTML;
     }
     window.scrollTo(0, 0);
@@ -1106,6 +939,7 @@ async function showAdminDashboard() {
     $('formationDetail').classList.remove('active');
     $('studentDashboard').classList.remove('active');
     $('adminDashboard').classList.add('active');
+
     if (isSupabaseReady) {
         try {
             var dbStudents = await dbGetStudents();
@@ -1118,12 +952,15 @@ async function showAdminDashboard() {
             }
         } catch (e) { console.warn('Erreur chargement admin:', e); }
     }
+
     var allStudents = [];
     var keys = Object.keys(students);
     for (var i = 0; i < keys.length; i++) { allStudents.push({ code: keys[i], data: students[keys[i]] }); }
+
     var totalStudents = allStudents.length;
     var totalRevenue = 0; var totalPaid = 0; var pendingCount = 0; var approvedCount = 0; var rejectedCount = 0;
     for (var k = 0; k < allStudents.length; k++) { totalRevenue += allStudents[k].data.totalAmount; totalPaid += allStudents[k].data.paidAmount; if (allStudents[k].data.status === 'pending') pendingCount++; else if (allStudents[k].data.status === 'approved') approvedCount++; else if (allStudents[k].data.status === 'rejected') rejectedCount++; }
+
     var statsHTML = '';
     statsHTML += '<div class="admin-stat-card"><div class="stat-icon">👥</div><div class="stat-val">' + totalStudents + '</div><div class="stat-lbl">Total Étudiants</div></div>';
     statsHTML += '<div class="admin-stat-card"><div class="stat-icon">⏳</div><div class="stat-val">' + pendingCount + '</div><div class="stat-lbl">En attente</div></div>';
@@ -1132,27 +969,34 @@ async function showAdminDashboard() {
     statsHTML += '<div class="admin-stat-card"><div class="stat-icon">📊</div><div class="stat-val">' + (totalRevenue - totalPaid).toLocaleString() + ' G</div><div class="stat-lbl">Solde Restant</div></div>';
     statsHTML += '<div class="admin-stat-card"><div class="stat-icon">🎓</div><div class="stat-val">' + formations.length + '</div><div class="stat-lbl">Formations Actives</div></div>';
     $('adminStatsGrid').innerHTML = statsHTML;
+
     $('countPending').textContent = pendingCount;
     $('countApproved').textContent = approvedCount;
+
     var pendingHTML = '';
     for (var m = 0; m < allStudents.length; m++) { var st = allStudents[m].data; if (st.status !== 'pending') continue; var code = allStudents[m].code; var fullName = st.prenom ? st.nom + ' ' + st.prenom : st.nom; var payLabel = st.paymentMethod === 'natcash' ? '💳 Natcash' : (st.paymentMethod === 'moncash' ? '💰 Moncash' : '-'); pendingHTML += '<tr><td><strong>' + escapeHtml(code) + '</strong></td><td>' + escapeHtml(fullName) + '</td><td>' + (st.phone || '-') + '</td><td>' + escapeHtml(st.formation) + '</td><td>' + st.totalAmount + ' G</td><td>' + payLabel + '</td><td>' + st.date + '</td><td><div class="action-btns"><button class="btn btn-success btn-approve" data-code="' + code + '" type="button">✅</button><button class="btn btn-danger btn-reject" data-code="' + code + '" type="button">❌</button></div></td></tr>'; }
     $('pendingTableBody').innerHTML = pendingHTML || '<tr><td colspan="8" style="text-align:center;color:#999;">Aucune inscription en attente</td></tr>';
+
     var approvedHTML = '';
-    for (var n = 0; n < allStudents.length; n++) { var st2 = allStudents[n].data; if (st2.status !== 'approved') continue; var code2 = allStudents[n].code; var fullName2 = st2.prenom ? st2.nom + ' ' + st2.prenom : st2.nom; approvedHTML += '<tr><td><strong>' + escapeHtml(code2) + '</strong></td><td>' + escapeHtml(fullName2) + '</td><td>' + (st2.phone || '-') + '</td><td>' + escapeHtml(st2.formation) + '</td><td><div class="progress-bar" style="margin:0;width:100px;"><div class="progress-fill" style="width:' + st2.progress + '%;">' + st2.progress + '%</div></div></td><td><span class="admin-badge badge-approved">✅ Approuvé</span></td><td><button class="btn btn-outline btn-view-student" data-code="' + code2 + '" type="button" style="padding:6px 12px;font-size:12px;">👁️ Voir</button></td></tr>'; }
+    for (var n = 0; n < allStudents.length; n++) { var st2 = allStudents[n].data; if (st2.status !== 'approved') continue; var code2 = allStudents[n].code; var fullName2 = st2.prenom ? st2.nom + ' ' + st2.prenom : st2.nom; approvedHTML += '<tr><td><strong>' + escapeHtml(code2) + '</strong></td><td>' + escapeHtml(fullName2) + '</td><td>' + (st2.phone || '-') + '</td><td>' + escapeHtml(st2.formation) + '</td><td><div class="progress-bar" style="margin:0;width:100px;"><div class="progress-fill" style="width:' + st2.progress + '%;">' + st2.progress + '%</div></div></td><td><span class="admin-badge badge-approved">✅ Approuvé</span></td><td><div class="action-btns"><button class="btn btn-info btn-view-student" data-code="' + code2 + '" type="button" style="padding:6px 12px;font-size:12px;">👁️ Tester</button></div></td></tr>'; }
     $('approvedTableBody').innerHTML = approvedHTML || '<tr><td colspan="7" style="text-align:center;color:#999;">Aucun étudiant approuvé</td></tr>';
+
     var allHTML = '';
     for (var p = 0; p < allStudents.length; p++) { var st3 = allStudents[p].data; var code3 = allStudents[p].code; var fullName3 = st3.prenom ? st3.nom + ' ' + st3.prenom : st3.nom; var statusClass = st3.status === 'approved' ? 'badge-approved' : (st3.status === 'rejected' ? 'badge-rejected' : 'badge-waiting'); var statusText = st3.status === 'approved' ? '✅ Approuvé' : (st3.status === 'rejected' ? '❌ Refusé' : '⏳ En attente'); allHTML += '<tr><td><strong>' + escapeHtml(code3) + '</strong></td><td>' + escapeHtml(fullName3) + '</td><td>' + (st3.phone || '-') + '</td><td>' + escapeHtml(st3.formation) + '</td><td>' + st3.totalAmount + ' G</td><td>' + st3.paidAmount + ' G</td><td><span class="admin-badge ' + statusClass + '">' + statusText + '</span></td><td>' + st3.date + '</td><td><button class="btn btn-danger btn-delete-student" data-code="' + code3 + '" type="button" style="padding:6px 12px;font-size:12px;">🗑️</button></td></tr>'; }
     $('allTableBody').innerHTML = allHTML || '<tr><td colspan="9" style="text-align:center;color:#999;">Aucun étudiant</td></tr>';
+
     var detStatsHTML = '';
     detStatsHTML += '<div class="admin-stat-card"><div class="stat-icon">💵</div><div class="stat-val">' + totalRevenue.toLocaleString() + ' G</div><div class="stat-lbl">Revenu Total</div></div>';
     detStatsHTML += '<div class="admin-stat-card"><div class="stat-icon">📈</div><div class="stat-val">' + (totalRevenue > 0 ? Math.round((totalPaid/totalRevenue)*100) : 0) + '%</div><div class="stat-lbl">Taux de recouvrement</div></div>';
     detStatsHTML += '<div class="admin-stat-card"><div class="stat-icon">📊</div><div class="stat-val">' + Math.round(allStudents.reduce(function(sum, s) { return sum + s.data.progress; }, 0) / (allStudents.length || 1)) + '%</div><div class="stat-lbl">Progression moyenne</div></div>';
     detStatsHTML += '<div class="admin-stat-card"><div class="stat-icon">🎯</div><div class="stat-val">' + allStudents.filter(function(s) { return s.data.progress === 100; }).length + '</div><div class="stat-lbl">Formations terminées</div></div>';
     $('adminDetailedStats').innerHTML = detStatsHTML;
+
     var formStatsHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;">';
     for (var q = 0; q < formations.length; q++) { var fid = formations[q].id; var count = allStudents.filter(function(s) { return s.data.formationId === fid; }).length; var revenue = allStudents.filter(function(s) { return s.data.formationId === fid; }).reduce(function(sum, s) { return sum + s.data.paidAmount; }, 0); formStatsHTML += '<div style="background:var(--cream);padding:20px;border-radius:12px;border-left:4px solid var(--gold);"><h4 style="color:var(--brown-main);margin-bottom:10px;">' + escapeHtml(formations[q].name) + '</h4><p style="font-size:13px;color:#666;">👥 ' + count + ' étudiant(s)</p><p style="font-size:13px;color:#666;">💰 ' + revenue.toLocaleString() + ' G encaissé</p></div>'; }
     formStatsHTML += '</div>';
     $('formationStats').innerHTML = formStatsHTML;
+
     window.scrollTo(0, 0);
 }
 
@@ -1171,7 +1015,7 @@ function openApproveModal(code) {
     $('approveStudentInfo').innerHTML = infoHTML;
     var newCode = 'NOVA' + Date.now().toString().slice(-8);
     $('generatedAccessCode').value = newCode;
-    var msg = '🎓 Félicitations ' + escapeHtml(fullName) + '!\n\nVotre inscription à la formation "' + escapeHtml(st.formation) + '" chez Nova Institute a été APPROUVÉE!\n\n🔑 Votre code d\'accès est: ' + newCode + '\n\nUtilisez ce code pour vous connecter à votre espace étudiant sur notre site web.\n\n📍 Adresse: Cité Militaire / L\'École Foi d\'Abraham\n📞 Contact: 58046408 / 44699777\n💬 WhatsApp: 33552907\n\nBienvenue chez Nova Institute! 🎉';
+    var msg = '🎓 Félicitations ' + escapeHtml(fullName) + '!\n\nVotre inscription à la formation "' + escapeHtml(st.formation) + '" chez Nova Institute a été APPROUVÉE!\n\n🔑 Votre code d\'accès est: ' + newCode + '\n\nUtilisez ce code pour vous connecter à votre espace étudiant sur notre site web.\n\n Adresse: Cité Militaire / L\'École Foi d\'Abraham\n📞 Contact: 58046408 / 44699777\n💬 WhatsApp: 33552907\n\nBienvenue chez Nova Institute! 🎉';
     $('approveMessage').value = msg;
     $('approveModal').classList.add('active');
 }
@@ -1180,90 +1024,33 @@ async function confirmApprove() {
     var code = currentApproveCode;
     var newCode = $('generatedAccessCode').value.trim();
     var message = $('approveMessage').value;
-    
-    if (!newCode) {
-        showAlert('Erreur', 'Veuillez générer un code d\'accès.', '⚠️');
-        return;
-    }
-    
+    if (!newCode) { showAlert('Erreur', 'Veuillez générer un code d\'accès.', '⚠️'); return; }
     var st = students[code];
-    if (!st) {
-        showAlert('Erreur', 'Étudiant introuvable.', '❌');
-        return;
-    }
-    
-    // 1. Kreye nouvo etidyan an nan cache lokal la ak NOUVO kòd la
-    students[newCode] = Object.assign({}, st, { 
-        status: 'approved',
-        date: new Date().toISOString().split('T')[0]
-    });
-    
-    // 2. Efase ansyen an nan cache lokal la
+    if (!st) return;
+    students[newCode] = Object.assign({}, st, { status: 'approved' });
     delete students[code];
-    
-    // 3. Nan Supabase: INSERE nouvo a + SIPIRME ansyen an (pa UPDATE code la!)
     if (isSupabaseReady) {
         try {
-            // Insérer le nouveau avec le nouveau code
-            var newStudentData = {
-                code: newCode,
-                nom: st.nom,
-                prenom: st.prenom || '',
-                phone: st.phone || '',
-                formation: st.formation,
-                formation_id: st.formationId,
-                date: new Date().toISOString().split('T')[0],
-                schedule: st.schedule,
-                duration: st.duration,
-                total_amount: st.totalAmount,
-                paid_amount: st.paidAmount,
-                progress: st.progress,
-                completed_courses: st.completedCourses,
-                total_courses: st.totalCourses,
-                present: st.present,
-                absent: st.absent,
-                late: st.late,
-                payment_method: st.paymentMethod,
-                payment_number: st.paymentNumber || '',
-                status: 'approved',
-                approved_code: newCode,
-                created_by: 'admin_approved'
-            };
-            
+            var newStudentData = { code: newCode, nom: st.nom, prenom: st.prenom || '', phone: st.phone || '', formation: st.formation, formation_id: st.formationId, date: new Date().toISOString().split('T')[0], schedule: st.schedule, duration: st.duration, total_amount: st.totalAmount, paid_amount: st.paidAmount, progress: st.progress, completed_courses: st.completedCourses, total_courses: st.totalCourses, present: st.present, absent: st.absent, late: st.late, payment_method: st.paymentMethod, payment_number: st.paymentNumber || '', status: 'approved', approved_code: newCode, created_by: 'admin_approved' };
             var insertResult = await dbInsertStudent(newStudentData);
             console.log('✅ Nouvo etidyan insere:', newCode, insertResult);
-            
-            // Supprimer l'ancien (TEMP...)
             if (code.startsWith('TEMP')) {
                 var deleteResult = await dbDeleteStudent(code);
                 console.log('🗑️ Ansyen etidyan siprime:', code, deleteResult);
             } else {
-                // Si ce n'est pas un TEMP, on met juste à jour le status
-                await supabase.from('students').update({
-                    status: 'approved',
-                    approved_code: newCode
-                }).eq('code', code);
+                await supabase.from('students').update({ status: 'approved', approved_code: newCode }).eq('code', code);
                 console.log('✏️ Status mise à jour pour:', code);
             }
-        } catch (e) {
-            console.error('❌ Erè nan Supabase:', e);
-            showAlert('Atansyon', 'Changement sauvegardé localement mais erreur Supabase: ' + e.message, '️');
-        }
+        } catch (e) { console.error('❌ Erè nan Supabase:', e); }
     }
-    
-    // 4. Voye WhatsApp bay etidyan an
     var phone = st.phone.replace(/\D/g, '');
     if (phone.startsWith('0')) phone = '509' + phone.substring(1);
     if (!phone.startsWith('509')) phone = '509' + phone;
     var whatsappURL = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(message);
     window.open(whatsappURL, '_blank');
-    
     closeApprove();
-    showAlert('Succès!', 'Inscription approuvée! Code: ' + newCode + '\nWhatsApp voye bay: ' + phone, '✅');
-    
-    // 5. Rafraîchir dashboard la
+    showAlert('Succès!', 'Inscription approuvée! Code: ' + newCode, '✅');
     await showAdminDashboard();
-    }
 }
 
 async function rejectStudent(code) {
@@ -1277,88 +1064,46 @@ async function rejectStudent(code) {
 }
 
 async function deleteStudent(code) {
-    if (!confirm('Êtes-vous sûr de vouloir supprimer cet étudiant? Cette action est irréversible.')) return;
+    if (!confirm('️ Êtes-vous SÛR de vouloir supprimer cet étudiant?\n\nCode: ' + code + '\nNom: ' + (students[code] ? (students[code].nom + ' ' + students[code].prenom) : '') + '\n\nCette action est IRRÉVERSIBLE!')) return;
+    var studentName = students[code] ? (students[code].nom + ' ' + students[code].prenom) : code;
     delete students[code];
-    if (isSupabaseReady) { try { await dbDeleteStudent(code); console.log('✅ Étudiant supprimé de Supabase:', code); } catch (e) { console.warn('Erreur suppression:', e); } }
-    showAlert('Supprimé', 'L\'étudiant a été supprimé avec succès.', '️');
+    console.log('🗑️ Efase nan cache lokal:', code);
+    if (isSupabaseReady) {
+        try {
+            var result = await dbDeleteStudent(code);
+            if (result) { console.log('✅ Siprime nan Supabase:', code); showAlert('Siprime!', 'Étudiant ' + studentName + ' supprimé avec succès.', '🗑️'); }
+            else { console.warn('⚠️ Sipresyon Supabase echwe pou:', code); showAlert('Atansyon', 'Étudiant supprimé localement mais pas dans Supabase.', '️'); }
+        } catch (e) { console.error('❌ Erè sipresyon:', e); showAlert('Erè', 'Impossible de supprimer dans Supabase: ' + e.message, '❌'); }
+    } else { showAlert('Siprime!', 'Étudiant supprimé (mode hors-ligne).', '️'); }
     await showAdminDashboard();
 }
 
 async function handleAdminAddStudent(e) {
     e.preventDefault();
-    var nom = $('addNom').value.trim();
-    var prenom = $('addPrenom').value.trim();
-    var phone = $('addPhone').value.trim();
-    var formationId = $('addFormation').value;
-    var totalAmount = parseInt($('addTotalAmount').value) || 0;
-    var paidAmount = parseInt($('addPaidAmount').value) || 0;
-    var duration = $('addDuration').value.trim();
-    var schedule = $('addSchedule').value.trim();
-    var paymentMethod = $('addPaymentMethod').value;
-    var paymentNumber = $('addPaymentNumber').value.trim();
-    var customCode = $('addCustomCode').value.trim().toUpperCase();
-    var progress = parseInt($('addProgress').value) || 0;
-
-    if (!nom || !prenom || !phone || !formationId) {
-        showAlert('Erreur', 'Veuillez remplir tous les champs obligatoires (*).', '️');
-        return;
-    }
-
+    var nom = $('addNom').value.trim(); var prenom = $('addPrenom').value.trim(); var phone = $('addPhone').value.trim(); var formationId = $('addFormation').value;
+    var totalAmount = parseInt($('addTotalAmount').value) || 0; var paidAmount = parseInt($('addPaidAmount').value) || 0;
+    var duration = $('addDuration').value.trim(); var schedule = $('addSchedule').value.trim();
+    var paymentMethod = $('addPaymentMethod').value; var paymentNumber = $('addPaymentNumber').value.trim();
+    var customCode = $('addCustomCode').value.trim().toUpperCase(); var progress = parseInt($('addProgress').value) || 0;
+    if (!nom || !prenom || !phone || !formationId) { showAlert('Erreur', 'Veuillez remplir tous les champs obligatoires (*).', '⚠️'); return; }
     var formation = null;
     for (var i = 0; i < formations.length; i++) { if (formations[i].id === formationId) { formation = formations[i]; break; } }
     if (!formation) { showAlert('Erreur', 'Formation invalide.', '⚠️'); return; }
-
     var code = customCode || ('NOVA' + Date.now().toString().slice(-8));
-
-    // Vérifier si le code existe déjà
-    if (students[code]) {
-        showAlert('Erreur', 'Ce code existe déjà. Veuillez en choisir un autre ou laisser le champ vide.', '⚠️');
-        return;
-    }
-
+    if (students[code]) { showAlert('Erreur', 'Ce code existe déjà. Veuillez en choisir un autre ou laisser le champ vide.', '⚠️'); return; }
     var today = new Date().toISOString().split('T')[0];
-    var studentData = {
-        code: code, nom: nom, prenom: prenom, phone: phone,
-        formation: formation.name, formation_id: formationId,
-        date: today, schedule: schedule || formation.schedule,
-        duration: duration || formation.duration,
-        total_amount: totalAmount || (formation.inscription + formation.participation),
-        paid_amount: paidAmount, progress: progress,
-        completed_courses: Math.round((progress / 100) * formation.courses.length),
-        total_courses: formation.courses.length,
-        present: 0, absent: 0, late: 0,
-        payment_method: paymentMethod, payment_number: paymentNumber || (paymentMethod === 'natcash' ? CONFIG.NATCASH_NUMBER : CONFIG.MONCASH_NUMBER),
-        status: 'approved', approved_code: code, created_by: 'admin'
-    };
-
-    // Sauvegarder en local
-    students[code] = {
-        nom: nom, prenom: prenom, phone: phone, formation: formation.name, formationId: formationId,
-        date: today, schedule: studentData.schedule, duration: studentData.duration,
-        totalAmount: studentData.total_amount, paidAmount: studentData.paid_amount,
-        progress: studentData.progress, completedCourses: studentData.completed_courses,
-        totalCourses: studentData.total_courses, present: 0, absent: 0, late: 0,
-        status: 'approved', paymentMethod: paymentMethod
-    };
-
-    // Sauvegarder dans Supabase
+    var studentData = { code: code, nom: nom, prenom: prenom, phone: phone, formation: formation.name, formation_id: formationId, date: today, schedule: schedule || formation.schedule, duration: duration || formation.duration, total_amount: totalAmount || (formation.inscription + formation.participation), paid_amount: paidAmount, progress: progress, completed_courses: Math.round((progress / 100) * formation.courses.length), total_courses: formation.courses.length, present: 0, absent: 0, late: 0, payment_method: paymentMethod, payment_number: paymentNumber || (paymentMethod === 'natcash' ? CONFIG.NATCASH_NUMBER : CONFIG.MONCASH_NUMBER), status: 'approved', approved_code: code, created_by: 'admin' };
+    students[code] = { nom: nom, prenom: prenom, phone: phone, formation: formation.name, formationId: formationId, date: today, schedule: studentData.schedule, duration: studentData.duration, totalAmount: studentData.total_amount, paidAmount: studentData.paid_amount, progress: studentData.progress, completedCourses: studentData.completed_courses, totalCourses: studentData.total_courses, present: 0, absent: 0, late: 0, status: 'approved', paymentMethod: paymentMethod };
     var dbResult = await dbInsertStudent(studentData);
-    if (dbResult) { console.log('✅ Étudiant ajouté dans Supabase:', code); }
-    else { console.warn('⚠️ Mode offline - étudiant ajouté en local'); }
-
-    // Afficher le code généré
+    if (dbResult) { console.log('✅ Étudiant ajouté dans Supabase:', code); } else { console.warn('⚠️ Mode offline'); }
     $('successTitle').textContent = 'Étudiant ajouté avec succès!';
     $('successMessage').textContent = 'L\'étudiant peut maintenant se connecter avec le code suivant:';
     $('generatedCode').textContent = code;
     $('successCodeDisplay').style.display = 'block';
     $('successModal').classList.add('active');
-
-    // Réinitialiser le formulaire
     $('adminAddStudentForm').reset();
     $('addPaidAmount').value = '0';
     $('addProgress').value = '0';
-
-    // Rafraîchir le dashboard
     await showAdminDashboard();
 }
 
@@ -1435,7 +1180,7 @@ function addEventListeners() {
 
 async function init() {
     console.log('🚀 Démarrage Nova Institute...');
-    var loadingTimeout = setTimeout(function() { console.warn('⏰ Timeout loading'); hideLoading(); }, 5000);
+    var loadingTimeout = setTimeout(function() { console.warn(' Timeout loading - fòse kache'); hideLoading(); }, 3000);
     try {
         showLoading('Connexion à la base de données...');
         initSupabase();
@@ -1460,7 +1205,18 @@ async function init() {
         clearTimeout(loadingTimeout);
         hideLoading();
         console.log('✅ Site prêt!');
-    } catch (error) { console.error('❌ Erreur fatale:', error); clearTimeout(loadingTimeout); hideLoading(); var keys4 = Object.keys(CONFIG.STUDENT_CODES); for (var m = 0; m < keys4.length; m++) { students[keys4[m]] = CONFIG.STUDENT_CODES[keys4[m]]; } renderFormations(); populateFormationSelects(); addEventListeners(); $('statStudents').textContent = keys4.length + '+'; $('statFormations').textContent = formations.length + '+'; }
+    } catch (error) {
+        console.error('❌ Erreur fatale:', error);
+        clearTimeout(loadingTimeout);
+        hideLoading();
+        var keys4 = Object.keys(CONFIG.STUDENT_CODES);
+        for (var m = 0; m < keys4.length; m++) { students[keys4[m]] = CONFIG.STUDENT_CODES[keys4[m]]; }
+        renderFormations();
+        populateFormationSelects();
+        addEventListeners();
+        $('statStudents').textContent = keys4.length + '+';
+        $('statFormations').textContent = formations.length + '+';
+    }
 }
 
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
