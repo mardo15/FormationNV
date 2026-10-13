@@ -1021,36 +1021,73 @@ function logout() {
 // INITIALISATION
 // ============================================================
 async function init() {
-    showLoading('Connexion à la base de données...');
-    initSupabase();
-
-    if (isSupabaseReady) {
-        var dbStudents = await dbGetStudents();
-        if (dbStudents && dbStudents.length > 0) {
-            for (var i = 0; i < dbStudents.length; i++) {
-                var s = dbStudents[i];
-                students[s.code] = {
-                    nom: s.nom, prenom: s.prenom || '', phone: s.phone || '', formation: s.formation, formationId: s.formation_id,
-                    date: s.date, schedule: s.schedule, duration: s.duration, totalAmount: s.total_amount, paidAmount: s.paid_amount,
-                    progress: s.progress, completedCourses: s.completed_courses, totalCourses: s.total_courses,
-                    present: s.present, absent: s.absent, late: s.late
-                };
+    try {
+        // Retire loading overlay imedyatman si gen pwoblèm
+        setTimeout(function() {
+            hideLoading();
+        }, 5000); // Maksimòm 5 segonn
+        
+        showLoading('Connexion à la base de données...');
+        
+        // Eseye konekte Supabase
+        var supabaseConnected = initSupabase();
+        
+        if (supabaseConnected) {
+            console.log('Tantativ chajeman depi Supabase...');
+            try {
+                var dbStudents = await dbGetStudents();
+                if (dbStudents && dbStudents.length > 0) {
+                    for (var i = 0; i < dbStudents.length; i++) {
+                        var s = dbStudents[i];
+                        students[s.code] = {
+                            nom: s.nom, prenom: s.prenom || '', phone: s.phone || '',
+                            formation: s.formation, formationId: s.formation_id,
+                            date: s.date, schedule: s.schedule, duration: s.duration,
+                            totalAmount: s.total_amount, paidAmount: s.paid_amount,
+                            progress: s.progress, completedCourses: s.completed_courses,
+                            totalCourses: s.total_courses, present: s.present,
+                            absent: s.absent, late: s.late
+                        };
+                    }
+                    console.log(dbStudents.length + ' etidyan chaje');
+                } else {
+                    await syncStudentsToSupabase();
+                }
+            } catch (dbError) {
+                console.warn('Erè Supabase, itilize mode offline:', dbError);
+                // Mode offline
+                var keys = Object.keys(CONFIG.STUDENT_CODES);
+                for (var j = 0; j < keys.length; j++) {
+                    students[keys[j]] = CONFIG.STUDENT_CODES[keys[j]];
+                }
             }
-            console.log('✅ ' + dbStudents.length + ' étudiants chargés depuis Supabase');
         } else {
-            await syncStudentsToSupabase();
+            // Mode offline
+            var keys = Object.keys(CONFIG.STUDENT_CODES);
+            for (var k = 0; k < keys.length; k++) {
+                students[keys[k]] = CONFIG.STUDENT_CODES[keys[k]];
+            }
         }
-    } else {
-        var keys = Object.keys(CONFIG.STUDENT_CODES);
-        for (var j = 0; j < keys.length; j++) { students[keys[j]] = CONFIG.STUDENT_CODES[keys[j]]; }
+        
+        $('statStudents').textContent = Object.keys(students).length + '+';
+        $('statFormations').textContent = formations.length + '+';
+        
+        renderFormations();
+        populateFormationSelect();
+        addEventListeners();
+        
+        hideLoading();
+        console.log('✅ Sit la pare!');
+        
+    } catch (error) {
+        console.error('Erè fatal nan init():', error);
+        hideLoading();
+        showAlert('Erreur', 'Une erreur est survenue lors du chargement. Veuillez rafraîchir la page.', '');
     }
+}
 
-    $('statStudents').textContent = Object.keys(students).length + '+';
-    $('statFormations').textContent = formations.length + '+';
-
-    renderFormations();
-    populateFormationSelect();
-
+// Fonksyon pou ajoute tout event listeners yo
+function addEventListeners() {
     $('logoLink').addEventListener('click', showHome);
     $('navHome').addEventListener('click', showHome);
     $('navFormations').addEventListener('click', scrollToFormations);
@@ -1069,16 +1106,22 @@ async function init() {
     $('registerForm').addEventListener('submit', handleRegister);
 
     var paymentRadios = document.querySelectorAll('input[name="regPayment"]');
-    for (var k = 0; k < paymentRadios.length; k++) { paymentRadios[k].addEventListener('change', updatePaymentInfo); }
-
-    var sectionBtns = document.querySelectorAll('.quick-action-btn');
-    for (var l = 0; l < sectionBtns.length; l++) { sectionBtns[l].addEventListener('click', handleSectionClick); }
-
-    var modals = document.querySelectorAll('.modal');
-    for (var m = 0; m < modals.length; m++) {
-        modals[m].addEventListener('click', function(e) { if (e.target === this) { this.classList.remove('active'); } });
+    for (var i = 0; i < paymentRadios.length; i++) {
+        paymentRadios[i].addEventListener('change', updatePaymentInfo);
     }
 
+    var sectionBtns = document.querySelectorAll('.quick-action-btn');
+    for (var j = 0; j < sectionBtns.length; j++) {
+        sectionBtns[j].addEventListener('click', handleSectionClick);
+    }
+
+    var modals = document.querySelectorAll('.modal');
+    for (var k = 0; k < modals.length; k++) {
+        modals[k].addEventListener('click', function(e) {
+            if (e.target === this) { this.classList.remove('active'); }
+        });
+    }
+}
     hideLoading();
 }
 
